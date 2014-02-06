@@ -1,0 +1,112 @@
+@imgIconWidth: 20px;
+@imgIconHeight: 20px;
+@totalNumIcons: 14;
+@largeIconScale: 2.5;
+
+.large-icon {
+  width: @imgIconWidth * @largeIconScale;
+  height: @imgIconWidth * @largeIconScale;
+
+  background-image: url("/static/main/images/icon_chart_types_white.svg");
+  background-repeat: no-repeat;
+  background-size: @totalNumIcons * @imgIconWidth * @largeIconScale;
+}
+
+.select-icon {
+  float: left;
+  width: @imgIconWidth;
+  height: @imgIconHeight;
+  margin-top: -2px;
+  margin-right: 15px;
+  text-align: left;
+
+  background-image: url("/static/main/images/icon_chart_types.svg");
+  background-repeat: no-repeat;
+  background-size: @totalNumIcons * @imgIconWidth;
+}
+
+.dropdown-inactive {
+  .select-icon {
+    background-image: url("/static/main/images/icon_chart_types_white.svg");
+  }
+}
+
+.img-icon-area {
+  background-position: -100px 0;
+}
+.img-icon-bar {
+  background-position: -20px 0;
+}
+.img-icon-box {
+  background-position: -120px 0;
+}
+.img-icon-line {
+  background-position: 0 0;
+}
+.img-icon-scatter {
+  background-position: -60px 0;
+}
+.img-icon-tile {
+  background-position: -80px 0;
+}
+.img-icon-spline {
+  background-position: -140px 0;
+}
+
+.img-icon-pie {
+  background-position: -40px 0;
+}
+.img-icon-star {
+  background-position: -200px 0;
+}
+.img-icon-splider {
+  background-position: -220px 0;
+}
+.img-icon-spider {
+  background-position: -240px 0;
+}
+
+.large-icon.img-icon-area {
+  background-position: -100px*@largeIconScale 0;
+}
+.large-icon.img-icon-bar {
+  background-position: -20px*@largeIconScale 0;
+}
+.large-icon.img-icon-box {
+  background-position: -120px*@largeIconScale 0;
+}
+.large-icon.img-icon-line {
+  background-position: 0 0;
+}
+.large-icon.img-icon-scatter {
+  background-position: -60px*@largeIconScale 0;
+}
+.large-icon.img-icon-tile {
+  background-position: -80px*@largeIconScale 0;
+}
+.large-icon.img-icon-spline {
+  background-position: -140px*@largeIconScale 0;
+}
+
+.large-icon.img-icon-pie {
+  background-position: -40px*@largeIconScale 0;
+}
+.large-icon.img-icon-star {
+  background-position: -200px*@largeIconScale 0;
+}
+.large-icon.img-icon-splider {
+  background-position: -220px*@largeIconScale 0;
+}
+.large-icon.img-icon-spider {
+  background-position: -240px*@largeIconScale 0;
+}
+
+.large-icon.img-icon-annotation {
+  background-position: -160px*@largeIconScale 0;
+}
+.large-icon.img-icon-numeral {
+  background-position: -180px*@largeIconScale 0;
+}
+.large-icon.img-icon-table {
+  background-position: -260px*@largeIconScale 0;
+}

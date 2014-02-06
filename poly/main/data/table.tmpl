@@ -1,0 +1,21 @@
+<script type='text/html' id='tmpl-table-metric-list'>
+  <div class="table-metric-list" data-bind="css: {selected: selected}">
+    <div class="details">
+      <a class="btn-large" data-bind="click: openDataTableViewer">View/Edit</a>
+    </div>
+    <div class="table-title" data-bind="click: select">
+      <div class="title-text" data-bind="text: name"></div>
+      <div class="arrow"></div>
+    </div>
+    <div class="metrics" data-bind="style: {maxHeight: renderHeight() + 'px'}">
+      <!-- Extra div to help with animation -->
+      <div data-bind="template: {
+        foreach: visibleMetrics,
+        name: 'tmpl-metric-item',
+        afterRender: initMetric,
+       }">
+      </div>
+    </div>
+  </div>
+</script>
+

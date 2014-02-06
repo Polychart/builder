@@ -1,0 +1,30 @@
+{% extends "base.tmpl" %}
+{% load staticfiles %}
+
+{% block title %}Loading...{% endblock %}
+{% block body %}
+<script>
+  var response  = {{ response|safe }},
+      serverApi = require('poly/common/serverApi'),
+      events    = require('poly/main/events');
+
+  if(response.error){
+    console.error(response.message);
+    events.nav.dscreate.oautherr.trigger({details: response.message});
+    setTimeout(function(){ window.location.href = '/home';}, 50);
+  } else {
+    function callback(err, resp){
+      if(err){
+        console.error(err);
+        events.nav.dscreate.error.trigger({details: err});
+      } else {
+        events.nav.dscreate.success.trigger();
+        setTimeout(function(){ window.location.href = '/home'; }, 50);
+      }
+    }
+    if(response.type == 'googleAnalytics'){
+      serverApi.sendPost('/data-source/create', response, callback);
+    }
+  }
+</script>
+{% endblock %}

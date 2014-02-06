@@ -1,0 +1,5 @@
+Backend files for Polychart.
+
+The folder `polychartQuery` contains the logic for turning frontend
+drag-and-drop actions into SQL queries, google analytics calls, etc.
+

@@ -1,0 +1,25 @@
+*.pyc
+*.sublime-project
+*.sublime-workspace
+*.swo
+*.swp
+
+/*.db
+/compiledStatic
+/lib/jqueryui/jquery.ui.polychart.css
+/log/*
+/node_modules/*
+/onprem
+/polychart-onprem-*.zip
+/polychartPackaged
+/server/polychart/config/deployOverrides.py
+/server/polychart/config/localOverrides.py
+/server/polychart/config/overrides.py
+/tmp
+/uploadedData
+
+# Deployment
+/allStatic
+/gunicorn.conf
+/server/polychart/config/deployParams.py
+/virtualenv/*

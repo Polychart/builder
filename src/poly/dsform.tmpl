@@ -1,0 +1,256 @@
+<script type='text/html' id='tmpl-new-data-source'>
+<div id="new-data-source-wrapper">
+  <div class="arrow"></div>
+  <div id="new-data-source-top"></div>
+  <div id="new-data-source">
+    <div id="new-data-source-content">
+      <h1>Add New Data Source</h1>
+      <h2>Step <span data-bind="text: stepNum()+1"></span>: <span data-bind="text: formStep().stepName"></span></h2>
+      <div class="progress-bar">
+        <div class="progress-complete"
+             data-bind="style: {width: progPercWidth() + 'px'}">
+        </div>
+      </div>
+      <form data-bind="submit: formSubmit">
+        <div class="step cf" data-bind="template:{
+                                        name: formStep().templateName,
+                                        data: formStep(),
+                                        afterRender: initFormStep
+                                        }">
+        </div>
+      </form>
+      <div id="disable-actions" data-bind="visible: actionsDisabled"></div>
+      <div class="btn-large action" data-bind="click: prevStep, visible: backBtnVisible()">
+        <div class="content cf">
+          <img src="static/main/images/icon_arrow_left.svg" />
+          <div data-bind="text: formStep().backBtnText"></div>
+        </div>
+      </div>
+      <div class="btn-large action" data-bind="click: nextStep, visible: nextBtnVisible()">
+        <div class="content cf">
+          <div data-bind="text: formStep().nextBtnText"></div>
+          <img src="static/main/images/icon_arrow_right.svg" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="new-data-source-bottom"></div>
+  <div id="close-nds" data-bind="click: $parent.toggleDataSourceForm"></div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-source-type'>
+<div>
+  <!-- ko foreach: typeButtons -->
+  <div data-bind="click: $parent.typeButtonClicked,
+                  attr: {'class': 'btn-large btn-img img-' + $data.name},
+                  css: {
+                    selected: $parent.type() == $data.name,
+                    right: $index() % 2 == 1,
+                    wide: $data.wide,
+                  }">
+    <div class="content"></div>
+  </div>
+  <!-- /ko -->
+</div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-connection-type'>
+<p>
+  Please select how you would like Polychart to connect to your database.
+</p>
+<p>
+  <strong>SSH</strong>: Polychart will use an encrypted SSH connection.
+</p>
+<p>
+  <strong>Direct connection</strong>: Polychart will connect directly to your database.
+  This option may require that you open an additional port in your firewall.
+</p>
+<div>
+  <select data-bind="options: options, optionsText: optionsText, value: type"></select>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-ssh'>
+<p>
+  Please create a new user account for Polychart on the server running your database.
+  Feel free to contact us if you would like help restricting what access this account
+  has to your server.
+</p>
+<p>
+  Important: please ensure that you have the "socat" package installed on your server.
+</p>
+<div>
+  <label>SSH Username</label>
+  <input type="text" maxlength="255" value="polychart" name="sshUsername" data-bind="value: sshUsername" />
+  <label>SSH Host</label>
+  <input type="text" maxlength="255" placeholder="eg. dbserver.example.com" name="sshHost" data-bind="value: sshHost" />
+  <label>SSH Port</label>
+  <input type="text" maxlength="5" name="sshPort" value="22" pattern="{\d}[1-5]" data-bind="value: sshPort" />
+  <label>Place this public key into <strong>~/.ssh/authorized_keys</strong> of the user account home directory:</label>
+  <textarea name="sshPublicKey" data-bind="text: sshPublicKey" readonly="true"></textarea>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-socket-filename'>
+<p>
+  Unfortunately, we couldn't automatically determine the location of your database's
+  Unix socket file.
+</p>
+<p>
+  Don't worry!
+  You can usually find this by searching your database configuration file
+  by searching for "socket", or running the command <code>netstat -ln | grep mysql</code>.
+  Feel free to contact us if you're having trouble.
+</p>
+<div>
+  <label>Socket File Path</label>
+  <input type="text" maxlength="255" name="dbUnixSocket" data-bind="value: dbUnixSocket" />
+</div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-direct-connection'>
+<div>
+  <label>Host</label>
+  <input type="text" maxlength="255" placeholder="eg. db.example.com" name="dbHost" data-bind="value: dbHost" />
+  <label>Port</label>
+  <input type="text" maxlength="5" name="dbPort" pattern="{\d}[1-5]" data-bind="value: dbPort" />
+</div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-database-account'>
+<p>
+  Please create a database account for Polychart.
+</p>
+<p>
+  We recommend making this account read-only.
+  If you need help with this step, feel free to contact us.
+</p>
+<div>
+  <label>Database Username</label>
+  <input type="text" maxlength="50" value="polychart" name="dbUsername" data-bind="value: dbUsername" />
+  <label>Database Password</label>
+  <input type="password" maxlength="50" name="dbPassword" data-bind="value: dbPassword" />
+  <label>Database Name</label>
+  <input type="text" maxlength="60" name="dbName" data-bind="value: dbName" />
+</div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-gaprof'>
+  <p>
+    Please enter your Google Analytics View ID.
+  </p>
+
+  <p>
+    You can find your <span style="font-weight: bold">View ID</span> by going to:<br /><br />
+    <span style="font-weight: bold">Admin</span> >>
+    Your View(Profile) >>
+    <span style="font-weight: bold">View Settings</span>.<br /><br />
+  </p>
+  <div>
+    <label>Google Analytics Profile ID</label>
+    <input type="text" maxLength="50" name="gaId" data-bind="value: gaId" />
+  </div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-csv-choose'>
+<p>
+  Please select one or more CSV files to upload.
+</p>
+<div>
+  <input type="file" name="csvFile" data-bind="value: csvFile" multiple />
+</div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-csv-upload'>
+<p>
+  <span data-bind="visible: !error()">Uploading your CSV files...</span>
+  <span class="progress-text" data-bind="text: progressText()"></span>
+</p>
+<div class="progress-bar" data-bind="css: {error: error()}">
+  <div class="progress-complete" data-bind="style: {width: progressWidth() + '%'}">
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-csv-clean'>
+<p>
+  Please verify that your dataset appears as intended.
+</p>
+<div class="csv-clean-options">
+  <div class="cf csv-table-selector">
+    <div class="btn-large prev-table-btn"
+         data-bind="class: {hidden: !isPrevTableEnabled()},
+                    click: prevTable">
+      <div class="content">
+        <img src="static/main/images/icon_arrow_left.svg" />
+      </div>
+    </div>
+    <div class="btn-large next-table-btn"
+         data-bind="class: {hidden: !isNextTableEnabled()},
+                    click: nextTable">
+      <div class="content">
+        <img src="static/main/images/icon_arrow_right.svg" />
+      </div>
+    </div>
+    <div class="csv-table-name" data-bind="pui_contentEditable: curTable().tableName" contenteditable></div>
+  </div>
+  <div class="csv-table-options">
+    <label>Does the file have a header?</label>
+    <div class="selector" data-bind="template: {name: 'tmpl-selector', data: curTable().hasHeader}">
+    </div>
+    <label>Delimiter</label>
+    <div class="selector" data-bind="template: {name: 'tmpl-selector', data: curTable().delimiter}">
+    </div>
+    <label>Number of rows to process (optional)</label>
+    <input type="text" maxlength="5" pattern="{\d}[1-5]" data-bind="value: curTable().rowsToKeep" placeholder="(all)" />
+  </div>
+  <div id="slickgrid-container" data-bind="SlickgridData: slickRows, SlickgridColumns: slickColumns, SlickgridHeaderTmpl: 'tmpl-csv-clean-header'">
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-csv-clean-header'>
+<div data-bind="attr: {'class': 'column-type ' + dataType()},
+                click: changeDataType"></div>
+<span class="column-name" data-bind="pui_contentEditable: name" contenteditable></span>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-name-ds'>
+<p>
+  Please choose a name for this data source.
+</p>
+<div>
+  <input type="text" maxlength="200" placeholder="eg. Customer Database" name="name" data-bind="value: name" />
+</div>
+</script>
+
+<script type='text/html' id='tmpl-nds-form-complete'>
+<p data-bind="visible: state() == 'connecting'">
+  Connecting...
+</p>
+<p data-bind="visible: state() == 'unknownError'">
+  An error occurred.
+</p>
+<p data-bind="visible: state() == 'knownError'">
+  The following error occurred:
+</p>
+<p data-bind="visible: state() == 'knownError'">
+  <code data-bind="text: errorMessage"></code>
+</p>
+<p data-bind="visible: state() == 'knownError' || state() == 'unknownError'">
+  Please check your information and try again.
+  If you're not sure how to resolve this issue,
+  feel free to contact us via the link in the bottom right corner.
+</p>
+</script>
+
+<script type='text/html' id='tmpl-selector'>
+  <!-- ko foreach: options -->
+    <div class="selectorOption">
+      <input class="radio" type="radio" data-bind="attr: {name: $parent.name, id: $parent.name + '-' + value, value: value}, checked: $parent._value" />
+      <label class="styledRadio" data-bind="attr: {for: $parent.name + '-' + value}"></label>
+      <span class="radioLabel" data-bind="text: label, attr: {for: $parent.name + '-' + value}"></span>
+    </div>
+  <!-- /ko -->
+</script>

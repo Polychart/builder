@@ -1,0 +1,35 @@
+<script type='text/html' id='tmpl-layer'>
+<div class="single-layer">
+  <div class="menu-item-container">
+    <div class="menu-item-name">
+      <div class="content">Type</div>
+    </div>
+    <div class="menu-item">
+      <div class='dropdown chart-dropdown btn-large'
+           data-bind="DropdownSingle: {
+             options: plotOptionsItem,
+             selected: plotOptionSelected,
+             hasIcons: true,
+             name: 'type'
+        }"></div>
+    </div>
+  </div>
+  <div data-bind="foreach: visibleAesthetics" class="full-width cf">
+    <div data-bind= "template: {name: template, afterRender: afterRender}"></div>
+  </div>
+  <!-- ko template: {name: 'tmpl-joins', data: joinsView } --><!-- /ko -->
+  <div id="filters">
+    <!-- ko template: {name: 'tmpl-filters', data: filtersView } --><!-- /ko -->
+  </div>
+
+  <div class="menu-item-container">
+    <div class="menu-item-name"></div>
+    <div class="btn-flat" href="#" data-bind="click: removeLayer">
+      <div class="content">
+        <img src="/static/main/images/icon_delete.svg" />
+        <span class="bolded">Delete</span> Layer
+      </div>
+    </div>
+  </div>
+</div>
+</script>

@@ -1,0 +1,249 @@
+/* Styling for joins dialog */
+.edit-joins {
+  width:       154px;
+  margin-top:  0;
+  float:       left;
+}
+
+.renderable {
+  background-color: @polyOrange;
+  &:hover {
+    background-color: lighten(@polyOrange, 10%);
+  }
+}
+
+#dialog-container {
+  #poly .rounded-corners();
+  #poly .box-shadow(0, 2px, 0, @black);
+
+  position:          absolute;
+  top:               20%;
+  left:              25%;
+  min-width:         600px;
+  width:             50%;
+  padding:           24px 24px;
+  background-color:  @darkGray;
+  color:             @white;
+  z-index:           @zIndexOverlay;
+
+  .underlined {
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid @white;
+  }
+
+
+  .joins-text {
+    padding: 16px 10px;
+  }
+
+  .joins-headers {
+    width:          100%;
+    height:         24px;
+    border-bottom:  1px double @white;
+    .left, .right {
+      display:     inline-block;
+      float:       left;
+      width:       40%;
+      text-align:  center;
+    }
+    .mid {
+      display:     inline-block;
+      float:       left;
+      width:       10%;
+      text-align:  center;
+    }
+  }
+  .joins-present {
+    width:          100%;
+    height:         36px;
+    border-bottom:  1px solid @white;
+    padding:        8px 0;
+    margin-top:     4px;
+    line-height:    1.5em;
+
+    .left, .right {
+      display:     inline-block;
+      float:       left;
+      width:       40%;
+      text-align:  center;
+    }
+    .left.table, .right.col {
+      display:  block;
+      clear:    both;
+    }
+
+    .mid {
+      display:     inline-block;
+      float:       left;
+      width:       10%;
+      text-align:  center;
+    }
+
+    .remove-join {
+      position:           absolute;
+      float:              left;
+      width:              22px;
+      height:             22px;
+      z-index:            13;
+      background-image:   url("/static/main/images/icon_minus.svg");
+      background-size:    contain;
+      background-repeat:  no-repeat;
+      &:hover { cursor: pointer; }
+    }
+  }
+
+  .join-box {
+    width:        100%;
+    height:       100px;
+    margin:       6px 0;
+    padding-top:  12px;
+
+    .left, .right, .mid {
+      display:  inline-block;
+      float:    left;
+      width:    32%;
+      height:   100px;
+
+      .dropdown-block, .on {
+        display:    block;
+        float:      left;
+        clear:      both;
+        text-align: center;
+        overflow:   hidden;
+      }
+      .dropdown-inactive {
+        background-color: rgb(185,185,185);
+      }
+    }
+    .mid.dropdown-block.dropdown { top: 20px; }
+    .dropdown-sentence {
+      display: inline-block;
+      float: left;
+    }
+  }
+
+  /* Styling for joins buttons */
+  .joins-buttons {
+    .btn-large, .btn-flat {
+      display:    inline-block;
+      width:      40%;
+      padding:    6px 10px;
+      margin:     10px 8px;
+      font-size:  @fontSizeNormal;
+    }
+    .btn-large {
+      float:        right;
+      margin-right: 5%;
+    }
+    .btn-flat  {
+      float:        left;
+      margin-left:  5%;
+    }
+  }
+
+  .joins-done {
+    float:  right;
+    width:  200px;
+    &:hover { cursor: pointer; }
+  }
+
+  /* Styles for options in Basic Joins Editor */
+  .join-box-basic {
+    height:  24px;
+    width:   100%;
+    margin:  8px 0;
+
+    .left, .right {
+      display: block;
+      width: 40%;
+      float: left;
+    }
+    .mid {
+      display: block;
+      float: left;
+      width: 15%;
+      text-align: center;
+    }
+    .left {
+      text-align: right;
+      .table-separator, .dropdown, .dropdown-inactive {
+        float: right;
+      }
+    }
+    .right {
+      text-align: left;
+      .table-separator, .dropdown, .dropdown-inactive {
+        float: left;
+      }
+    }
+
+    .inner-join {
+      padding: 10px 0 9px;
+      display: inline-block;
+      font-style: italic;
+    }
+    .table-separator {
+      padding: 10px 0 9px;
+      display: inline-block;
+    }
+    .new-table {
+      padding: 10px 4px 9px;
+      margin-bottom: 4px;
+      display: inline-block;
+      float: right;
+    }
+    .dropdown, .dropdown-inactive {
+      display: inline-block;
+      width: auto;
+      padding: 10px 4px 9px;
+      cursor: pointer;
+      color: white;
+      .metric-option-arrow {
+        border: none;
+      }
+      .name {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .joins-close {
+    width: 22px;
+    height: 22px;
+    float: right;
+    background-image: url("/static/main/images/icon_close_black.svg");
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .menu-item {
+    width: 100%;
+  }
+
+  .dropdown {
+    display: inline-block;
+    float: left;
+    color: @black;
+  }
+
+  .join-var-on {
+    color: black;
+    display: inline-block;
+    float: left;
+    margin: 0 1em;
+    font-family: @monospace;
+  }
+
+  .joins-domain, .join {
+    color: black;
+    display: inline-block;
+    float: left;
+    margin: 0 1em;
+    font-family: @monospace;
+  }
+}
+

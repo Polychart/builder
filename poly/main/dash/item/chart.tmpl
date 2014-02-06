@@ -1,0 +1,23 @@
+<script type='text/html' id='tmpl-chart-item'>
+<div class="chart item"
+     data-bind="style: {zIndex: zIndex},
+                pui_jqDraggableResizeable: dragResizeParams,
+                css: {'drag-shadow': isDragging},
+                event: {mousedown: onSelect}">
+  <div class="chart-inner">
+  </div>
+  <div class="chart-error" data-bind="visible: error">
+    <span class="text" data-bind="text: error"></span>
+  </div>
+  <div class="details" data-bind="visible: !isViewer()">
+    <div class="details-button editChartBtn" data-bind="click: editChart">
+      <img src="/static/main/images/icon_edit.png" />
+      <span class="text"><span class="keyword">Edit</span> Chart</span>
+    </div>
+    <div class="details-button deleteChartBtn" data-bind="click: deleteItem">
+      <img src="/static/main/images/icon_delete.svg" />
+      <span class="text"><span class="keyword">Delete</span> Chart</span>
+    </div>
+  </div>
+</div>
+</script>

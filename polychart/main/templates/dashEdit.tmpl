@@ -1,0 +1,30 @@
+{% extends "base.tmpl" %}
+
+{% load staticfiles %}
+
+{% block title %}Dashboard Builder{% endblock %}
+
+{% block body %}
+  <div id='chart' class='polychart-ui'></div>
+  <script>
+    var poly      = require('poly');
+    var serverApi = require('poly/common/serverApi');
+    var TOAST     = require('poly/main/error/toast');
+
+    var dataCollection = {{ dataCollection|safe }};
+
+    polychart_global = poly.dashboard({
+      dom: $('#chart')[0],
+      header: true,
+      width: 'fill',
+      height: 'fill',
+      name: "{{ name }}",
+      key: "{{ key }}",
+      dataCollection: dataCollection,
+      {% if settings.EXPORT_SERVICE_PORT %}
+      exportingEnabled: true,
+      {% endif %}
+      initial: {{ dashboardSpec|safe }}
+    });
+  </script>
+{% endblock %}

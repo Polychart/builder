@@ -1,0 +1,21 @@
+<script type="text/html" id="tmpl-aesthetic">
+<div class="menu-item-container" data-dnd-type="metric" data-bind="pui_dndContainer: {itementer:onMetricEnter,itemdiscard:onMetricDiscard,dropfilter:dropFilter,datatype:'metric',name:name,rerender:metric}, css: {disabled: !enabled()}">
+  <div class="menu-item-name">
+    <div class="content" data-bind="text: name()"></div>
+  </div>
+  <div class="menu-item">
+    <!-- ko if: metric -->
+    <div class="dropped-metric" data-bind="template: {
+      data: metric,
+      name: metricTemplate,
+      afterRender: initMetricItem,
+    }">
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot: metric -->
+      <!-- ko template: {name: 'tmpl-metric-droppable', data: {enabled: enabled()}} --><!-- /ko -->
+    <!-- /ko -->
+  </div>
+</div>
+</script>
+

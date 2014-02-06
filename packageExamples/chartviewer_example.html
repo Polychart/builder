@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script>
+      // for testing IE, remove array.indexOf
+      // delete Array.prototype.indexOf;
+    </script>
+
+    <link rel="stylesheet" href="static/dependencies.css" />
+    <link rel="stylesheet" href="static/main.css" />
+
+    <script src="static/dependencies.js"></script>
+    <script src="static/main.js"></script>
+  </head>
+  <body>
+    <div id="chart"></div>
+
+    <script>
+      var poly = require('poly');
+      var demoData = [
+        {
+          name: 'Email',
+          data: require('poly/demoData/email').emails,
+          meta: {
+            id: { type: 'num' },
+            template_id: { type: 'cat' },
+            created: { type: 'date' },
+            success: { type: 'cat' },
+            message_hash: { type: 'cat' },
+            source: { type: 'cat' }
+          }
+        },
+        {
+          name: 'Content',
+          data: require('poly/demoData/content').content,
+          meta: {
+            user_id: { type: 'cat' },
+            created: { type: 'date' },
+            dataset_id: { type: 'num' },
+            title: { type: 'cat' },
+            public: { type: 'cat' },
+          }
+        }
+      ];
+      var default_spec = {
+        dom: $('#chart')[0],
+        dataCollection: {
+          type: 'local',
+          tables: demoData,
+        },
+        initial: {"layers":[{"type":"bar","x":{"var":"Email.template_id"},"tableName":"Email","y":{"var":"count(Email.id)"},"color":{"var":"Email.success"},"sample":500}],"coord":{"type":"cartesian","flip":false},"width":796,"height":475}
+      }
+      polychart_global = poly.chartviewer(default_spec);
+
+
+    </script>
+  </body>
+</html>
+

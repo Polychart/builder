@@ -1,0 +1,14 @@
+# Package names on Ubuntu.
+# Don't forget to also update the Chef recipe.
+
+libffi-dev
+libmysqlclient-dev
+libpq-dev
+libxml2-dev
+libxslt-dev
+mysql-client-core-5.5
+mysql-server
+python-setuptools
+python-virtualenv
+python2.7-dev
+socat

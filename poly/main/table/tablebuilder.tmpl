@@ -1,0 +1,35 @@
+<script type='text/html' id='tmpl-tablebuilder'>
+<div class='menu-panel'>
+  <div class="menu-container">
+    <!-- ko template: {name: 'tmpl-aesgroup', data: columnsView} --><!-- /ko -->
+    <!-- ko template: {name: 'tmpl-aesgroup', data: rowsView} --><!-- /ko -->
+    <!-- ko template: {name: 'tmpl-aesgroup', data: valuesView} --><!-- /ko -->
+    <div style="height: 20px"></div>
+    <h1 class="underlined">Filter</h1>
+    <!-- ko template: {name: 'tmpl-filters', data: filtersView } --><!-- /ko -->
+
+    <!-- ko if: joinsView.hasJoins -->
+      <div style="height: 20px"></div>
+      <h1 class="underlined">Joins</h1>
+      <!-- ko template: {name: 'tmpl-joins', data: joinsView } --><!-- /ko -->
+    <!-- /ko -->
+  </div>
+</div>
+<div class='content-panel'>
+  <div class="buttons cf">
+    <!-- ko if: backButtonVisible() -->
+    <div data-bind="click: backToDashboard" class="btn-flat cf">
+      <img src="/static/main/images/icon_back_white.svg" />
+      <div class="content">Return to Dashboard</div>
+    </div>
+    <!-- /ko -->
+  </div>
+  <div class='chart-container'>
+    <!-- ko template: {name: 'tmpl-tablebuilder-inner', afterRender: initDom } --><!-- /ko -->
+  </div>
+</div>
+</script>
+
+<script type="text/html" id='tmpl-tablebuilder-inner'>
+<div class='tablebuilder-table'></div>
+</script>

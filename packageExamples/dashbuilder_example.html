@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Dashboard Builder Demo</title>
+
+    <link rel="stylesheet" href="static/dependencies.css" />
+    <link rel="stylesheet" href="static/main.css" />
+
+    <script src="static/dependencies.js"></script>
+    <script src="static/main.js"></script>
+  </head>
+  <body>
+    <div id="dashboard"></div>
+
+    <script>
+      var poly = require('poly');
+
+      var demoData = [
+        {
+          name: 'email_log',
+          data: require('poly/demoData/email').emails,
+          meta: {
+            id: { type: 'num' },
+            template_id: { type: 'cat' },
+            created: { type: 'date' },
+            success: { type: 'cat' },
+            message_hash: { type: 'cat' },
+            source: { type: 'cat' }
+          }
+        },
+        {
+          name: 'content_log',
+          data: require('poly/demoData/content').content,
+          meta: {
+            user_id: { type: 'cat' },
+            created: { type: 'date' },
+            dataset_id: { type: 'num' },
+            title: { type: 'cat' },
+            public:  { type: 'cat' }
+          }
+        }
+      ]
+
+      var polychart_global = poly.dashboard({
+        name: "Demo Dashboard",
+        dom: $('#dashboard')[0],
+        header: false,
+        width: 'fill',
+        height: 'fill',
+        local: true,
+        dataCollection: {
+          type: 'local',
+          tables: demoData
+        }
+      });
+    </script>
+  </body>
+</html>
+

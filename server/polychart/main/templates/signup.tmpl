@@ -1,0 +1,134 @@
+{% extends "oldBase.tmpl" %}
+
+{% block more_script %}
+<script>
+$(function() {
+  require('poly/signup').init();
+});
+</script>
+{% endblock %}
+
+{% block body %}
+<div id='errorScreen' class="main">
+  {% if error == 'invalid' %}
+  <div class="syncError">
+    Could not create your account.
+  </div>
+  {% elif error %}
+  <div class="syncError">
+    An unknown error occured.  Please try again later!
+  </div>
+  {% endif %}
+</div>
+
+<noscript>Polychart requires that JavaScript be enabled in your browser.</noscript>
+
+<section class="main">
+  <h3>Sign Up</h3>
+  Already have an account? <a href="/login">Login here</a>.
+</section>
+
+<section id='signupScreen' class="main cf">
+  <form class="siteForm twoCol" action="/signup" method="POST">
+    <input type="hidden" name="next" value="{{ request.REQUEST.next }}"/>
+    <input type="hidden" name="c" value="{{ request.REQUEST.c }}"/>
+    {% csrf_token %}
+
+    <div class="cf">
+      <div class="field">
+        <label class="inputDesc">username</label>
+        <div class="inputField">
+          {{ signup_form.username }}
+        </div>
+        {{ signup_form.username.errors }}
+      </div>
+
+      <div class="field">
+        <label class="inputDesc">password</label>
+        <div class="inputField">
+          {{ signup_form.password }}
+        </div>
+        {{ signup_form.password.errors }}
+      </div>
+
+      <div class="clearboth"></div> <!-- force linebreak even when there are errors -->
+
+      <div class="field">
+        <label class="inputDesc">first name</label>
+        <div class="inputField">
+          {{ signup_form.first_name }}
+        </div>
+        {{ signup_form.first_name.errors }}
+      </div>
+
+      <div class="field">
+        <label class="inputDesc">last name</label>
+        <div class="inputField">
+          {{ signup_form.last_name }}
+        </div>
+        {{ signup_form.last_name.errors }}
+      </div>
+
+      <div class="clearboth"></div> <!-- force linebreak even when there are errors -->
+
+      <div class="field">
+        <label class="inputDesc">company</label>
+        <div class="inputField">
+          {{ signup_form.company }}
+        </div>
+        {{ signup_form.company.errors }}
+      </div>
+
+      <div class="field">
+        <label class="inputDesc">job title</label>
+        <div class="inputField">
+          {{ signup_form.title }}
+        </div>
+        {{ signup_form.title.errors }}
+      </div>
+
+      <div class="clearboth"></div> <!-- force linebreak even when there are errors -->
+
+      <div class="field">
+        <label class="inputDesc">email</label>
+        <div class="inputField">
+          {{ signup_form.email }}
+        </div>
+        {{ signup_form.email.errors }}
+      </div>
+
+      <div class="field">
+        <label class="inputDesc">phone</label>
+        <div class="inputField">
+          {{ signup_form.phone }}
+        </div>
+        {{ signup_form.phone.errors }}
+      </div>
+
+      <div class="clearboth"></div> <!-- force linebreak even when there are errors -->
+    </div>
+
+    <div class="field clearboth">
+      {{ signup_form.technical }}
+      <label for="eula">
+        I have the technical skills needed to access my web server using ssh and create user accounts on my database.
+      </label>
+    </div>
+
+    <div class="field clearboth">
+      <input type='checkbox' id='eula' name='eula' />
+      <label for="eula">
+        I agree to the Polychart <a href="/terms/main" target="_blank">Terms and Conditions</a> and Polychart <a href="/terms/beta" target="_blank">Beta Agreement</a>.
+      </label>
+    </div>
+
+    <div class="clearboth"></div> <!-- force linebreak even when there are errors -->
+
+    <div>
+      <input id="start" type='button' class='btn small' value="Start Now!"></input>
+      <input id="realsubmit" type='submit' class='hidden'></input>
+    </div>
+
+  </form>
+</signup>
+{% endblock %}

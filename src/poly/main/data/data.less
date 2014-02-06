@@ -1,0 +1,109 @@
+INPUT.formula-alias, INPUT.formula-input {
+  #poly .rounded-corners();
+  background-color: white;
+  border: 1px solid @medGray;
+  min-height: 2em;
+  padding-left: .5em;
+  width: 100%;
+}
+
+
+.ui-autocomplete {
+  display: block;
+  line-height: 1.7em;
+  max-width: 250px;
+  .ui-menu-item {
+    background-color: white;
+
+    a {
+      display: block;
+      width: 100%;
+    }
+
+    &:hover, &:focus {
+      background-color: @faintGray;
+    }
+
+    A.ui-state-focus, A.ui-state-active {
+      font-weight: bold;
+    }
+  }
+
+}
+
+.menu-section {
+  margin-bottom: 35px;
+  .content.formula {
+    font-size: 0.9em; //the word "Formula" is just a little too big
+  }
+  A.help-docs {
+    cursor: pointer;
+    cursor: hand;
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
+.edit-metric-content {
+  height: 20px;
+  DIV.metric-name {
+    display: inline-block;
+    max-width: 150px;
+    overflow: ellipsis;
+  }
+  A {
+    text-decoration: underline;
+  }
+  A:hover {
+    cursor: pointer;
+    cursor: hand;
+  }
+
+}
+
+// formula documentation overlay
+
+.formula-close {
+  width: 22px;
+  height: 22px;
+  float: right;
+  background-image: url("/static/main/images/icon_close_black.svg");
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.formula-inner-scrollable {
+  width: 100%;
+  height: 400px;
+  overflow-y: scroll;
+  table {
+    line-height: 22px;
+    width: 600px;
+  }
+  .formula-section {
+    font-size: @fontSizeLarge;
+    margin: 5px 0px;
+  }
+  tr {
+    padding-bottom: 3px;
+    background-color: darken(@darkerGray, 10%);
+    height: 40px;
+    &:nth-of-type(odd) {
+      height: 40px;
+      background-color: @darkerGray;
+    }
+  }
+  .formula-function {
+    width: 100px;
+  }
+  .formula-explantion{
+    width: 400px;
+  }
+  .formula-section-spacing {
+    height: 25px;
+  }
+
+}

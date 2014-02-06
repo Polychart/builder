@@ -1,0 +1,45 @@
+# Please include an exact version number with every package,
+# and use the correct case of the package name.
+# Unless necessary, do not use the inequality operators (e.g. ">").
+#
+# This reduces the number of "works for me" problems that occur
+# between different installations of Polychart.
+
+# Django
+Django==1.5.5
+South==0.7.6
+django-jsonfield==0.8.11
+django-modeldict==1.3.6
+nexus==0.2.3
+
+# Database drivers
+MySQL-python==1.2.4
+psycopg2==2.5.1
+
+# Crypto
+Padding==0.4
+pbkdf2==1.3
+pycrypto==2.6
+
+# Build-related
+lxml==3.2.0
+virtualenv==1.10.1
+
+# Deployment-related
+gunicorn==17.5
+python-memcached==1.53
+
+# Export-related
+CairoSVG==0.5 # can't move to 1.0.X due to https://github.com/Kozea/CairoSVG/issues/37
+WeasyPrint==0.19.2
+cairocffi==0.5.1
+svgwrite==1.1.2
+websocket-client==0.11.0
+
+# Misc
+analytics-python==0.4.1
+pika==0.9.5
+python-dateutil==2.1
+raven==1.6.1
+requests==1.2.3
+unittest-xml-reporting==1.3.2

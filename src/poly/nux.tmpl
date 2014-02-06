@@ -1,0 +1,78 @@
+<script type='text/html' id='tmpl-nux'>
+  <div id="nux" style="display: none">
+    <div class="covers">
+      <!-- ko foreach: covers -->
+      <div class="cover"
+           data-bind="style: {
+                        top: top,
+                        left: left,
+                        width: width,
+                        height: height
+                      }">
+      </div>
+      <!-- /ko -->
+    </div>
+    <div class="instructions" data-bind="
+                                  style: {
+                                    top: instrPos().top,
+                                    left: instrPos().left
+                                  },
+                                  css: {
+                                    arrowRight: arrowDir() == 'right',
+                                    arrowLeftLower: arrowDir() == 'leftlower',
+                                    arrowNone: arrowDir() == 'none'
+                                  }">
+      <div class="content">
+        <!-- ko if: title()-->
+        <h1 data-bind="text: title"></h1>
+        <!-- /ko -->
+        <!-- ko foreach: msgs() -->
+          <p data-bind="text: $data"></p>
+        <!-- /ko -->
+      </div>
+      <!-- ko if: instructions().length -->
+        <div class="bolded">Try it Now:</div>
+        <!-- ko foreach: instructions -->
+        <div class="instr" data-bind="css: {strike: $data.strike()}">
+          <span class="number" data-bind="text: $data.i"></span>
+          <span class="content" data-bind="text: $data.text"></span>
+        </div>
+        <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko if: buttonText() -->
+        <div class="btn-flat" data-bind="click: nextStep, text: buttonText()"></div>
+      <!-- /ko -->
+      <!-- ko if: skippable() -->
+        <div class="skip">
+          <a href="#" data-bind="click: skip">Skip Tutorial</a>
+        </div>
+      <!-- /ko -->
+    </div>
+  </div>
+</script>
+
+
+<script type='text/html' id='tmpl-nux-ga'>
+<h1>Google Analytics</h1>
+<p>
+  Looks like you connected with a Google Analytics account! We have a quick
+  note for you to make your experience with Polychart in Google Analytics a bit
+  more comfortable.
+</p>
+<p>
+  As you might know, Google Analytics separates things into
+  <span style='font-style: italic'>metrics</span> and <span style='font-style: italic;'>dimensions</span>. This is important
+  since Google Analytics requires at least one metric whenever you ask it for
+  data.
+</p>
+<p>
+  <span style='font-style: italic;'>Consequently, any chart must have <span style='font-weight: bold;'>at least one metric item.</span></span>
+</p>
+<p>
+  For clarity, <span style='font-weight: bold;'>metrics</span> are <span style='font-weight: bold; color: #ff9900'>orange</span> whereas
+  <span style='font-weight: bold;'>dimensions</span> are <span style='font-weight: bold; color: #84BCA5'>green</span>.
+</p>
+<p>
+  With that, happy charting!
+</p>
+</script>

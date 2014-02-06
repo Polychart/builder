@@ -1,0 +1,4 @@
+<a href="#" onClick="document.LOGOUT_FORM.submit();return false;">Log Out</a>
+<form name='LOGOUT_FORM' method='POST' action='/logout' style='display:none;'>
+  {% csrf_token %}
+</form>

@@ -1,0 +1,138 @@
+<script type='text/html' id='tmpl-joins'>
+<!-- ko if: hasJoins -->
+<div class="menu-item-container" data-bind="">
+  <div class="menu-item-name"></div>
+  <div class="btn-large edit-joins"
+       data-bind="click: openViewer, css: { renderable: !renderable() }">
+    <div class="content">
+    <span class="bolded">VIEW</span> Joins</div>
+  </div>
+</div>
+<!-- /ko -->
+</script>
+
+
+<script type="text/html" id="tmpl-joins-viewer">
+<div>
+  <div class="joins-close" data-bind="click: close"></div>
+  <h1 class="underlined">Viewing Table Joins</h1>
+  <div class="joins-headers">
+    <span class="left bolded">Table</span>
+    <span class="mid bolded">Type</span>
+    <span class="right bolded">Table</span>
+  </div>
+  <div class="old-joins"
+       data-bind="foreach: { data: joins, as: 'join' }">
+
+    <div class="joins-present">
+      <div class="left">
+        <div class="content">
+          <span class="bolded" data-bind="text: join.table1.name"></span> .
+          <span data-bind="text: join.column1"></span>
+        </div>
+      </div>
+
+      <div class="mid">
+        <div class="bolded type" data-bind="text: join.type"></div>
+      </div>
+
+      <div class="right">
+        <div class="content">
+          <span class="bolded" data-bind="text: join.table2.name"></span> .
+          <span data-bind="text: join.column2"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="joins-buttons">
+    <div class="btn-large" data-bind="click: close">
+      <span class="bolded">CLOSE</span>
+    </div>
+  </div>
+</div>
+
+</script>
+
+<script type="text/html" id="tmpl-joins-editor-basic">
+<div>
+  <div class="joins-close" data-bind="click: cancelJoin"></div>
+  <h1>New Table Join Required</h1>
+  <div class="underlined">
+    You just added a column from a new table, and must join the table
+    with an existing table to continue.
+  </div>
+  <div class="joins-headers">
+    <span class="left bolded">Tables</span>
+    <span class="mid bolded">Join</span>
+    <span class="right bolded">New Table</span>
+  </div>
+  <!-- ko template: { name: 'tmpl-joins-box'} --><!-- /ko -->
+  <div class="joins-buttons">
+    <div class="btn-flat" data-bind="click: cancelJoin">
+      <span class="bolded">Cancel</span> Join
+    </div>
+    <div class="btn-large" data-bind="click: confirmJoin">
+      <span class="bolded">Confirm</span> Join
+    </div>
+  </div>
+</div>
+</script>
+
+<script type="text/html" id="tmpl-joins-box">
+<div class="join-box">
+  <div class="left">
+    <div class="dropdown-block">
+      <div class="dropdown"
+           data-bind="DropdownSingle: {
+            options: existingTables,
+            selected: existingTableSel,
+            hasIcons: false,
+            name: 'joinTableFirst'
+           }"></div>
+    </div>
+    <div class="dropdown-block">
+      <div class="dropdown"
+           data-bind="DropdownSingle: {
+            options: existingVars,
+            selected: existingVarSel,
+            hasIcons: false,
+            name: 'joinVarsFirst'
+           }"></div>
+    </div>
+  </div>
+
+  <div class="mid">
+    <div class="dropdown-block">
+      <div class="dropdown"
+          data-bind="DropdownSingle: {
+            options: joinTypes,
+            selected: joinTypeSel,
+            hasIcons: false,
+            name: 'joinTypes'
+          }"></div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="dropdown-block">
+      <div class="dropdown"
+           data-bind="DropdownSingle: {
+            options: newTableDummy,
+            selected: newTableSelDummy,
+            hasIcons: false,
+            name: 'joinTableSecond'
+           }"></div>
+    </div>
+    <div class="dropdown-block">
+      <div class="dropdown"
+           data-bind="DropdownSingle: {
+              options: newVars,
+              selected: newVarSel,
+              hasIcons: false,
+              name: 'joinVarsSecond'
+             }"></div>
+    </div>
+  </div>
+</div>
+</script>
+

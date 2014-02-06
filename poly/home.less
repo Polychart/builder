@@ -1,0 +1,735 @@
+@import "main/mixins";
+
+.home.container {
+  #poly .colors;
+  #poly .fonts;
+  #poly .layers;
+
+  @headerHeight: 35px;
+  @leftPanelWidth: 400px;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  // We have a little more room to breath on this page
+  font-size: 18px;
+  background-color: @lightGray;
+
+  HEADER {
+    position: fixed;
+    width: 100%;
+
+    background-color: @white;
+
+    .logo {
+      margin-left: 15px;
+    }
+
+    .logoutButton {
+      float: right;
+
+      font-size: 90%;
+    }
+  }
+
+  #data-source-content {
+    margin-bottom: 0.5em;
+
+    border-bottom: 1px solid @medGray;
+  }
+
+  FORM {
+    INPUT[type="text"], INPUT[type="password"], INPUT[type="file"] {
+      #poly .inner-shadow(0, 2px, 0, @black);
+      #poly .rounded-corners();
+      width: 100%;
+      height: 33px;
+      margin-bottom: 15px;
+      padding-top: 2px;
+    }
+
+    TEXTAREA {
+      #poly .box-sizing(border-box);;
+      #poly .inner-shadow(0, 2px, 0, @black);
+      #poly .rounded-corners();
+      width: 100%;
+      padding: 9px
+    }
+
+    INPUT[type="file"] {
+      #poly .inner-shadow(0, 0, 0, @black);
+      padding-top: 3px;
+    }
+
+    .selectorOption {
+      display: inline;
+
+      font-size: @fontSizeSmall;
+
+      LABEL {
+        display: inline;
+
+        vertical-align: middle;
+      }
+
+      SPAN {
+        margin-right: 10px;
+      }
+    }
+
+    LABEL {
+      width: 100%;
+      display: block;
+      margin-bottom: 5px;
+      font-size: @fontSizeSmall;
+    }
+
+    P {
+      font-size: @fontSizeSmall;
+    }
+  }
+
+  .data-panel {
+    position: fixed;
+    top: 0;
+    width: @leftPanelWidth;
+    overflow-x: hidden;
+    padding: (@headerHeight + 25) 25px 0 15px;
+
+  .bolded {
+    font-weight: 600;
+    text-transform: none;
+  }
+
+  .data-source {
+    margin-top: 25px;
+  }
+
+  .table-title {
+    width: 100%;
+    padding-bottom: 10px;
+  }
+
+  .info-link {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: white;
+    font-size: 0.9em;
+  }
+
+  .btn-group {
+    #poly .box-sizing(border-box);
+
+    padding-bottom: 12px;
+    border-bottom: 1px solid @medGray;
+    margin-bottom: 24px;
+
+    position: relative;
+
+      .no-data-sources {
+        margin-top: -10px;
+
+        color: white;
+        text-align: left;
+        display: none;
+
+        &:last-child {
+          display: block;
+        }
+      }
+
+      .dash-btns {
+        display: block;
+
+        margin-right: 20px;
+
+        &.two {
+          margin-right: 59px;
+        }
+
+        &.three {
+          margin-right: 98px;
+        }
+
+        &.new {
+          #poly .animation-name(zoom-in);
+          #poly .animation-delay(1s);
+          #poly .animation-duration(0.4s);
+          #poly .animation-fill-mode(backwards);
+          #poly .animation-iteration-count(1);
+          #poly .animation-timing-function(ease-out);
+        }
+
+        .btn-large {
+          float: left;
+          text-align: left;
+          margin-top: 0;
+          height: 21px;
+          width: 100%;
+
+          &:active {
+            background-color: darken(@darkerGray, 10%);
+          }
+
+          &.active {
+            #poly .gray-inset();
+            background-color: darken(@darkerGray, 10%);
+
+            &:hover {
+              background-color: darken(@darkerGray, 5%);
+            }
+
+            &:active {
+              background-color: darken(@darkerGray, 10%);
+            }
+          }
+
+          .content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            width: 100%;
+            height: 20px;
+
+            IMG {
+              margin-top: -2px;
+              margin-right: 10px;
+            }
+          }
+
+          &:not(:first-child) {
+            #poly .rounded-left-corners(0);
+
+            position: absolute;
+            width: 15px;
+            right: 0;
+
+            IMG {
+              margin-left: -5px;
+              max-width: 24px;
+              margin-top: -1px;
+            }
+          }
+          &:not(:last-child) {
+            #poly .rounded-right-corners(0);
+          }
+        }
+      }
+    }
+  }
+
+  #page-content-wrapper {
+    top: @headerHeight + 6px;
+    bottom: 0;
+    position: absolute;
+  }
+
+  #page-content {
+    #poly .box-sizing(border-box);
+
+    padding-top: 19px;
+    padding-left: @leftPanelWidth;
+
+    height: 100%;
+
+    overflow-y: auto;
+
+    H1 {
+      color: @black;
+      margin-left: 25px;
+    }
+  }
+
+  .template {
+    display: none;
+  }
+
+  #dashboard-shade {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: @zIndexOverlay;
+  }
+
+  #data-source-content {
+    position: relative;
+  }
+
+  #dashboard-shade {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: @zIndexOverlay;
+
+    padding-left: @leftPanelWidth;
+    padding-top: @headerHeight + 5px;
+
+    .shade {
+      #poly .shade();
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+  }
+
+  #new-data-source-wrapper {
+    position: absolute;
+    margin: 60px 10px 60px 415px;
+    top: 0;
+    bottom: 0;
+
+    .arrow {
+      position: absolute;
+      top: 48px;
+      left: -25px;
+      width: 25px;
+      height: 40px;
+      z-index: @zIndexOverlay;
+
+      background-image: url('/static/main/images/bg_arrow_left.svg');
+      background-size: 25px;
+      background-repeat: no-repeat;
+    }
+  }
+
+  #new-data-source-top {
+    #poly .rounded-top-corners();
+
+    background-color: white;
+    width: 490px;
+    height: 20px;
+    z-index: @zIndexOverlay;
+    position: relative;
+  }
+
+  #new-data-source-bottom {
+    #poly .rounded-bottom-corners();
+    #poly .box-shadow(0, 5px, 0, @darkGray);
+
+    background-color: white;
+    width: 490px;
+    height: 20px;
+    z-index: @zIndexOverlay;
+    position: relative;
+  }
+
+  #close-nds {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 25px;
+    height: 25px;
+    z-index: @zIndexOverlay;
+
+    background-image: url('/static/main/images/icon_close_black.svg');
+    background-repeat: no-repeat;
+    background-size: 25px;
+    cursor: pointer;
+
+    &:hover {
+      background-image: url('/static/main/images/icon_close_red.svg');
+    }
+  }
+
+  #new-data-source {
+    #poly .transition(all, 0.3s, ease-in-out);
+
+    background-color: white;
+    width: 470px;
+    padding-left: 20px;
+    z-index: @zIndexOverlay;
+    position: relative;
+    max-height: 100%;
+    overflow-y: scroll;
+
+    #new-data-source-content {
+      width: 450px;
+    }
+
+    #disable-actions {
+      #poly .rounded-corners();
+
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+
+      background-color: @white;
+      opacity: .75;
+    }
+
+    H1 {
+      color: @black;
+    }
+
+    H2 {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    P {
+      margin-bottom: 15px;
+
+      STRONG {
+        font-weight: 600;
+      }
+
+      CODE {
+        font-family: @monospace;
+        font-size: @fontSizeSmall;
+      }
+    }
+
+    .progress-bar {
+      margin-bottom: 15px;
+    }
+
+    .btn-large {
+      &.btn-img {
+        width: 200px;
+        height: 80px;
+        margin-right: 10px;
+        float: left;
+
+        background-color: @lightGray;
+
+        .content {
+          width: 150px;
+          height: 80px;
+
+          background-size: 150px;
+          background-repeat: no-repeat;
+          margin: -4px 0 0;
+        }
+
+        &.wide .content {
+          background-size: 200px;
+          width: 200px;
+          margin-top: -15px;
+        }
+
+        &.selected, &:active {
+          #poly .gray-inset();
+          background-color: darken(@lightGray, 10%);
+        }
+      }
+
+      &.right {
+        margin-right: 0;
+      }
+
+      &.action {
+        float: left;
+        padding: 8px 15px;
+        margin-right: 15px;
+
+        DIV {
+          margin-top: -1px;
+          float: left;
+        }
+
+        IMG {
+          margin: 1px 0 0 0;
+        }
+      }
+    }
+
+    .step {
+      width: 100%;
+    }
+
+    SELECT {
+      width: auto;
+    }
+
+    .slick-header-column {
+      height: 24px;
+      background-color: @lightGray;
+
+      .column-name {
+        margin-left: 28px;
+        height: 26px;
+        line-height: 23px;
+        cursor: text;
+        padding-left: 3px;
+        padding-right: 3px;
+        padding-bottom: 1px;
+
+        &:hover {
+          background-color: darken(@lightGray, 10%);
+        }
+      }
+
+      .column-type {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        height: 24px;
+        width: 24px;
+        cursor: pointer;
+        background-repeat: no-repeat;
+        background-position: center;
+        #poly .rounded-corners();
+        border: 1px solid darken(@lightGray, 10%);
+
+        &.cat {
+          background-image: url('/static/main/images/icon_type_green_cat.svg')
+        }
+
+        &.num {
+          background-image: url('/static/main/images/icon_type_green_num.svg')
+        }
+
+        &.date {
+          background-image: url('/static/main/images/icon_type_green_date.svg')
+        }
+
+        &:hover {
+          background-color: darken(@lightGray, 10%);
+        }
+      }
+    }
+
+    .csv-clean-options {
+      #poly .box-sizing(border-box);
+      #poly .rounded-corners();
+      border: 1px solid @lightGray;
+
+      .csv-table-selector {
+        text-align: center;
+        width: 100%;
+
+        .prev-table-btn, .next-table-btn {
+          #poly .rounded-bottom-corners(0);
+          margin: 0;
+
+          IMG {
+            margin: 1px;
+          }
+
+          &.hidden {
+            opacity: 0;
+            cursor: default;
+          }
+        }
+
+        .prev-table-btn {
+          #poly .rounded-right-corners(0);
+          float: left;
+        }
+        .next-table-btn {
+          #poly .rounded-left-corners(0);
+          float: right;
+        }
+
+        .csv-table-name {
+          color: white;
+          background-color: @medGray;
+          cursor: text;
+
+          #poly .box-shadow(0, 2px, 0, @black);
+
+          margin: 0 41px;
+          height: 31px;
+          line-height: 31px;
+          vertical-align: middle;
+          padding: 0 6px;
+
+          &:hover {
+            background-color: lighten(@medGray, 10%);
+          }
+        }
+      }
+
+      .csv-table-options {
+        margin: 0.5em;
+
+        INPUT {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .dashboards {
+    padding-left: 25px;
+
+    #demo {
+      display: none;
+
+      &:last-child {
+        display: block;
+      }
+    }
+
+    .dashboard-preview {
+      #poly .rounded-corners();
+
+      position: relative;
+      width: 375px;
+      float: left;
+      margin: 0 25px 25px 0;
+      padding: 5px;
+
+      background-color: white;
+
+      & > IMG {
+        #poly .box-sizing(border-box);
+        width: 100%;
+
+        border: 1px solid @lightGray;
+      }
+
+      .dashboard-info-container {
+        height: 0;
+      }
+
+      .dashboard-info, .dashboard-info-demo {
+        #poly .box-sizing(border-box);
+        #poly .transition(all, 0.1s, ease-in-out);
+
+        position: relative;
+        width: 100%;
+        height: 35px;
+        bottom: 35px;
+        overflow: hidden;
+
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white;
+
+        .dashboard-title, .dashboard-title-demo {
+          padding: 8px 8px 8px 12px;
+        }
+
+        .dashboard-title, .dashboard-title-demo, .dashboard-options-title {
+          margin-bottom: 10px;
+          font-weight: 600;
+        }
+
+        .dashboard-options {
+          display: none;
+          position: absolute;
+          top: 20px;
+          text-align: center;
+          width: 100%;
+
+          .btn-flat {
+            display: block;
+            float: none;
+            width: 200px;
+            height: 20px;
+            padding: 5px;
+            margin: 0 auto 12px;
+
+            text-decoration: none;
+            font-size: @fontSizeNormal;
+
+            .content {
+              padding-top: 0;
+            }
+
+            IMG {
+              margin-right: 5px;
+              margin-top: -2px;
+            }
+
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.5);
+            }
+
+            &:active {
+              background-color: rgba(0, 0, 0, 0.5);
+              border: 1px solid @white;
+            }
+          }
+          .delete-dash {
+            // for IE9 since this image is an SVG
+            img {
+              max-height: 21px;
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  #delete-data-dialog {
+    #poly .rounded-corners();
+
+    position: absolute;
+    width: 275px;
+    padding: 10px;
+    z-index: @zIndexOverlay;
+
+    .btn-large {
+      float: left;
+      margin-right: 10px;
+    }
+  }
+
+  .btn-img {
+    &.img-mysql .content {
+      background-image: url('/static/main/images/mysql_gray.svg');
+    }
+
+    &.img-mysql.selected .content {
+      background-image: url('/static/main/images/mysql.svg');
+    }
+
+    &.img-infobright .content {
+      background-image: url('/static/main/images/infobright_gray.svg');
+    }
+
+    &.img-infobright.selected .content {
+      background-image: url('/static/main/images/infobright.svg');
+    }
+
+    &.img-postgresql .content {
+      background-image: url('/static/main/images/postgresql_gray.svg');
+    }
+
+    &.img-postgresql.selected .content {
+      background-image: url('/static/main/images/postgresql.svg');
+    }
+
+    &.img-salesforce .content {
+      background-image: url('/static/main/images/salesforce_gray.svg');
+    }
+
+    &.img-salesforce.selected .content {
+      background-image: url('/static/main/images/salesforce.svg');
+    }
+
+    &.img-googleAnalytics .content {
+      background-image: url('/static/main/images/google_analytics_gray.svg');
+    }
+
+    &.img-googleAnalytics.selected .content {
+      background-image: url('/static/main/images/google_analytics.svg');
+    }
+
+    &.img-csv .content {
+      background-image: url('/static/main/images/csv_gray.svg');
+    }
+
+    &.img-csv.selected .content {
+      background-image: url('/static/main/images/csv.svg');
+    }
+  }
+
+  #slickgrid-container {
+    height: 300px;
+  }
+}

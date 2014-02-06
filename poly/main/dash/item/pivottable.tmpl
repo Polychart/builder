@@ -1,0 +1,20 @@
+<script type='text/html' id='tmpl-pivottable-item'>
+<div class="pivot-table item"
+     data-bind="style: {zIndex: zIndex},
+                pui_jqDraggableResizeable: dragResizeParams,
+                css: {'drag-shadow': isDragging},
+                event: {mousedown: onSelect}">
+  <div class="inner"></div>
+
+  <div class="details" data-bind="visible: !isViewer()">
+    <div class="details-button editChartBtn" data-bind="click: editPivot">
+      <img src="/static/main/images/icon_edit.png" />
+      <span class="text"><span class="keyword">Edit</span> Table</span>
+    </div>
+    <div class="details-button deleteChartBtn" data-bind="click: deleteItem">
+      <img src="/static/main/images/icon_delete.svg" />
+      <span class="text"><span class="keyword">Delete</span> Table</span>
+    </div>
+  </div>
+</div>
+</script>

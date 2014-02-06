@@ -1,0 +1,16 @@
+<script type='text/html' id='tmpl-text-item'>
+<div class="item text"
+     data-bind="style: {zIndex: zIndex},
+                pui_jqDraggableResizeable: dragResizeParams,
+                css: {'drag-shadow': isDragging},
+                event: {mousedown: onSelect}">
+  <div class="content" contenteditable="true"
+                       data-bind="pui_contentEditable: textContent,
+                                  pui_placeholder: defaultText,
+                                  pui_draggableSelector: '.item',
+                                  attr: {contenteditable: !isViewer()},
+                                  event: {blur: onEditAreaBlur},
+                                  css: {enabled: !isViewer()}">
+  </div>
+</div>
+</script>

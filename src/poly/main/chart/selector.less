@@ -1,0 +1,82 @@
+/**
+ * CSS for selector items, mostly used in individual layer panels
+ */
+
+@selectorHeight: 24px;
+@selectorWidth: 103px;
+
+@sliderMarginLeft : 10px;
+@sliderWidth : 10px;
+
+@colorpickerMargin: 5px;
+@colorpickerCancelMargin: 10px;
+
+@textboxWidth: 115px;
+
+// **** END VARIABLES ****
+
+// ****  DROPDOWN FOR STATISTICS ****
+select {
+  padding: 0px;
+  margin: 0px;
+  height: @selectorHeight;
+  line-height: @selectorHeight;
+  width: @selectorWidth;
+}
+// **** END DROPDOWN FOR STATISTICS ****
+
+// **** SLIDERS FOR CONTINUOUS VALUES ****
+.slider-container {
+  .slider {
+    width: 100px;
+    clear:none;
+  }
+  .slider-value {
+    // JQuery UI's slider value.
+    margin-left: @sliderMarginLeft;
+    clear:none;
+    width:@sliderWidth;
+  }
+}
+.ui-slider-handle {
+  padding: 0px;
+}
+
+// **** END SLIDERS FOR CONTINUOUS VALUES ****
+
+// **** GENERIC VALUE-SELECTOR ****
+.value-selector {
+  text-align: center;
+  vertical-align: top;
+}
+// **** END GENERIC VALUE-SELECTOR ****
+
+// **** COLOR PICKER ****
+.simpleColorContainer {
+  .simpleColorDisplay {
+    position: relative;
+    top: 3px;
+    display: inline-block;
+    margin-top: @colorpickerMargin;
+  }
+  .simpleColorChooser {
+    position: absolute;
+    left: 0 !important;
+    top: 0 !important;
+
+    z-index: 1002;
+
+    background: white;
+  }
+}
+// **** END COLOR PICKER ****
+
+
+// *** TEXTBOX ****
+.textselect {
+  width: @textboxWidth;
+  padding: 0px;
+  margin-bottom:2px;
+}
+// *** END TEXTBOX ****
+

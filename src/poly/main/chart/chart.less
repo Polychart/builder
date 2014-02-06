@@ -1,0 +1,318 @@
+H1.underlined {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid @white;
+}
+
+.rotated {
+  #poly .transform(rotate(270deg));
+  #poly .transform-origin(0%, 0%);
+}
+
+.chartbuilder-container {
+  .menu-panel {
+    width: @middlePanelLarge + @scrollbarWidth;
+  }
+
+  .content-panel {
+    padding-left: @middlePanelLarge + @scrollbarWidth;
+
+    background-color: rgba(0, 0, 0, 0.8);
+
+    .buttons {
+      position: relative;
+      z-index: @zIndexOverlay;
+      padding: 8px 0 5px 20px;
+
+      .btn-flat {
+        width: auto;
+        margin-bottom: 0;
+        margin-right: 15px;
+
+        font-size: @fontSizeNormal;
+
+        IMG {
+          margin-top: 1px;
+          max-width: 30px;
+        }
+
+        .content {
+          margin-top: -1px;
+          padding-bottom: 2px;
+        }
+
+        &:active {
+          border: 1px solid @white;
+        }
+      }
+    }
+  }
+}
+
+.chart-container {
+  #poly .box-sizing(border-box);
+
+  position: relative;
+  top: -45px;
+  height: 100%;
+  padding: 45px 20px 20px;
+}
+
+.chartbuilder-chart {
+  height: 100%;
+
+  text-align: center;
+  background-color: @white;
+
+  cursor: default;
+}
+
+.component {
+  margin-left: 5px;
+  margin-right: 5px;
+  .title {
+    display: inline;
+    font-weight: 600;
+    padding-bottom: 5px;
+  }
+  .component-header {
+    padding: 8px;
+    cursor: pointer;
+  }
+  .arrow {
+    // Default to pointing right
+    float: right;
+    position: relative;
+    top: 0px;
+    right: 4px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid black;
+    border-right-style: none;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+  }
+}
+.layers.component {
+  min-height: 100px;
+}
+
+.topbar {
+  width: 100%;
+  height: 35px;
+  padding: 5px;
+  background-color: @darkGray;
+  a {
+    padding-left: 10px;
+    text-decoration: none;
+    color: @darkerGray;
+  }
+  .arrow {
+    float: left;
+    position: relative;
+    top: 0px;
+    left: 4px;
+    width: 0;
+    height: 0;
+    border-right: 7px solid black;
+    border-left-style: none;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+  }
+}
+
+#advanced-panel {
+  #poly .box-sizing(border-box);
+  color: white;
+
+  background-color: @darkGray;
+  h2 {
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+
+    border-bottom: 1px solid @white;
+    font-weight: bold;
+  }
+
+  .advanced-panel-content {
+    width: 100%;
+    position: relative;
+
+    background-color: @darkGray;
+  }
+
+  .panel-background {
+    opacity: 1;
+  }
+
+  .btn-large {
+    #poly .box-sizing(border-box);
+    float: left;
+    margin-top: 0;
+    width: 100%;
+  }
+}
+
+.advanced-panel-single {
+  width: 236px;
+  margin-bottom: 10px;
+  text-align: left;
+
+  .advanced-panel-header {
+    font-size: 20px;
+    border-bottom: 2px solid white;
+  }
+}
+
+.advanced-panel-name {
+  float: left;
+  width: 60px;
+  margin-top: 11px;
+  font-size: 16px;
+
+  color: white;
+}
+
+.advanced-panel-metric {
+  float: left;
+}
+
+.layers {
+  .highlight {
+    background-color: @lightGreen;
+  }
+
+  .layer-list {
+    padding-top: 5px;
+  }
+}
+.single-layer {
+  color: white;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid white;
+
+  .ymetric {
+    .dropped-metric {
+      display: inline-block;
+      width: 150px;
+    }
+  }
+}
+
+.menu-item-container {
+  #poly .clearfix;
+
+  width: 100%;
+
+  color: white;
+
+  .menu-item-name {
+    display: table;
+    float: left;
+    width: 50px;
+    height: 37px;
+    padding-right: 10px;
+
+    font-size: 16px;
+    color: white;
+
+    .content {
+      display: table-cell; // For vertical alignment
+      vertical-align: middle;
+    }
+  }
+  .menu-item {
+    float: left;
+    width: 175px;
+
+    SELECT {
+      width: 100%;
+    }
+  }
+  .dropped-metric {
+    width: 175px;
+
+    .metric {
+      width: 175px;
+      height: 33px;
+
+      .metric-name {
+        top: 0px;
+      }
+
+      .metric-icon {
+        margin-top: 6px;
+      }
+    }
+  }
+}
+
+.menu-item .slider-container {
+  margin-top: 10px;
+  display: inline-block;
+
+  .selector {
+    width: 155px;
+    margin-left: 9px;
+  }
+
+  .slider-value {
+    width: 100%;
+    margin: 8px 0 10px;
+
+    font-family: @numeric;
+    font-weight: lighter;
+    font-size: @fontSizeSmall;
+  }
+}
+.null-filter-small {
+  display: inline-block;
+  font-size: @fontSizeSmall;
+  margin-left: 10px;
+  position: relative;
+  top: -18px;
+  .metric-option-item-checkbox {
+    margin-right: 0px;
+    padding-right: 0px;
+  }
+}
+
+.btn-flat {
+  .btn-large();
+  #poly .inner-shadow(0, 0, 0, 0);
+
+  float: left;
+  padding: 5px 10px 4px;
+  width: 153px;
+  margin-top: 0;
+
+  background: transparent;
+  border: 1px white solid;
+  font-size: @fontSizeSmall;
+
+  .content {
+    padding-top: 3px;
+
+    IMG {
+      max-width: 25px;
+      max-height: 21px;
+      margin-top: -4px;
+    }
+  }
+}
+
+#new-layer {
+  margin-bottom: 35px;
+}
+
+#filters {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.menu-container {
+  #poly .box-sizing(border-box);
+  min-height: 100%;
+}

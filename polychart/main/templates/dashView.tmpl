@@ -1,0 +1,21 @@
+{% extends "base.tmpl" %}
+
+{% load staticfiles %}
+
+{% block title %}Dashboard Builder{% endblock %}
+
+{% block body %}
+  <div id='chart' class='polychart-ui'></div>
+  <script>
+    var poly = require('poly');
+
+    var dataCollection = {{ dataCollection|safe }};
+
+    poly_global = poly.dashviewer({
+      dom: $('#chart')[0],
+      name: "{{ name }}",
+      dataCollection: dataCollection, // TODO Impl' multiple data sources
+      initial: {{ dashboardSpec|safe }}
+    });
+  </script>
+{% endblock %}

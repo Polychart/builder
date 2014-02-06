@@ -1,0 +1,42 @@
+<script type='text/html' id='tmpl-chartbuilder'>
+<div class='menu-panel'>
+  <div class="menu-container">
+    <h1>Layers</h1>
+    <div class="layer-list" data-bind="template: {
+                                       foreach: layers,
+                                       name: 'tmpl-layer'
+                                       }">
+    </div>
+    <div id="new-layer" class="btn-large" data-bind="click:addLayer">
+      <div class="content">
+        <img src="/static/main/images/icon_plus.png" /><span class="bolded">Add</span> New Layer
+      </div>
+    </div>
+    <!-- ko template: {name: 'tmpl-advanced-panel', data: advancedPanel } --><!-- /ko -->
+  </div>
+</div>
+<div class='content-panel'>
+  <div class="buttons cf">
+    <!-- ko if: backButtonVisible() -->
+    <div data-bind="click: backToDashboard" class="btn-flat cf">
+      <img src="/static/main/images/icon_back_white.svg" />
+      <div class="content">Return to Dashboard</div>
+    </div>
+    <!-- /ko -->
+    <!--
+    <div id="export-btn" class="btn-flat cf">
+      <img src="/static/main/images/icon_export_white.svg" />
+      <div class="content">Export Chart</div>
+    </div>
+    -->
+    &nbsp;
+  </div>
+  <div class='chart-container'>
+    <!-- ko template: {name: 'tmpl-chartbuilder-chart', afterRender: initDom } --><!-- /ko -->
+  </div>
+</div>
+</script>
+
+<script type="text/html" id='tmpl-chartbuilder-chart'>
+<div class='chartbuilder-chart'></div>
+</script>

@@ -1,0 +1,163 @@
+{% extends "base.tmpl" %}
+
+{% load staticfiles %}
+
+{% block title %}My Dashboards{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(function () {
+      require('poly/home').main({
+        availableDataSourceTypes: {{ settings.ENABLED_DATA_SOURCE_TYPES|safe }}
+      });
+    });
+  </script>
+{% endblock %}
+
+{% block body %}
+<div class="home container">
+  <header>
+    <a href="/">
+      <img class="logo" src="{% static 'main/images/logo.svg' %}" />
+      <div class="logoutButton btn-small" data-bind="click: btnLogout">
+        <div class="content">Log Out</div>
+      </div>
+    </a>
+  </header>
+  <div id="nux-container"
+       data-bind="template: {name: 'tmpl-nux', data: nuxView, if: nuxView != null}"
+       data-tutorial-completed="{{ tutorialCompleted }}"></div>
+  <div class="data-panel">
+    <h1>Data Sources</h1>
+    <div class="btn-group">
+      <div class="dash-btns cf">
+        <div id="toggle-data-source" class="btn-large green" tabindex="0"
+             data-bind="event: {click: toggleDataSourceForm, keypress: btnKeyPress}">
+          <div class="content">
+            <img src="{% static 'main/images/icon_plus.png' %}" />
+            <span class="bolded">Data Source:</span> Create New
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-group" id="data-source-content">
+      {% for dataSource in dataSources %}
+      <div class="dash-btns two cf
+             {% if dataSource.key == newDataSourceKey %}
+             new
+             {% endif %}
+           "
+           data-key="{{ dataSource.key }}"
+           data-name="{{ dataSource.name }}">
+        <div class="create-dash btn-large cut-right" tabindex="0"
+             title="{{ dataSource.name }}"
+             data-bind="event: {click: btnCreateDash, keypress: btnKeyPress}">
+          <div class="content">
+            <img src="{% static 'main/images/icon_plus.png' %}" />
+            <span class="bolded">Create Dashboard:</span> {{ dataSource.name }}
+          </div>
+        </div>
+        <div class="delete-ds btn-large cut-left" tabindex="0"
+             data-bind="event: {click: showDeleteDsDialog, keypress: btnKeyPress}">
+          <div class="content">
+            <img src="{% static 'main/images/icon_delete_white.svg' %}" />
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="no-data-sources">
+        No data sources connected.
+      </div>
+      {% endfor %}
+    </div>
+    {% if settings.ONPREM_ADS_ENABLED %}
+    <a class="info-link" href="/plans" target="_blank">Learn more about our on-premise deployment options.</a>
+    <a class="info-link" href="/security" target="_blank">Learn more about our security.</a>
+    {% endif %}
+  </div>
+  <div id="page-content-wrapper">
+    <div id="page-content">
+      <h1>Your Dashboards</h1>
+      <div class="dashboards">
+        {% for dashboard in dashboards %}
+        <div class="dashboard-preview"
+             data-bind="event: { mouseenter: dashboardMouseEnter, mouseleave: dashboardMouseLeave }">
+          <img src="{% static 'main/images/dashboard-preview.png' %}" />
+          <div class="dashboard-info-container">
+            <div class="dashboard-info">
+              <div class="dashboard-title">
+                {{ dashboard.name }}
+              </div>
+              <div class="dashboard-options">
+                <div class="dashboard-options-title">
+                  {{ dashboard.name }}
+                </div>
+                <a class="btn-flat" href="dashboard/{{ dashboard.key }}/edit">
+                  <div class="content">
+                    <img src="{% static 'main/images/icon_edit.png' %}">
+                    Edit Dashboard
+                  </div>
+                </a>
+                <a class="btn-flat" href="dashboard/{{ dashboard.key }}/view" target="_blank">
+                  <div class="content">
+                    <img src="{% static 'main/images/icon_view.png' %}">
+                    View Dashboard
+                  </div>
+                </a>
+                <a class="btn-flat delete-dash" data-key="{{ dashboard.key }}" href='#'
+                   data-bind="click: btnDeleteDash">
+                  <div class="content">
+                    <img src="{% static 'main/images/icon_delete.svg' %}">
+                    Delete Dashboard
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <a id="demo" href="demo">
+          <div class="dashboard-preview">
+            <img src="{% static 'main/images/dashboard-preview.png' %}" />
+            <div class="dashboard-info-container">
+              <div class="dashboard-info-demo">
+                <div class="dashboard-title-demo">
+                  Demo Dashboard
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div id="dashboard-shade" style="display: none">
+    <div class="shade"></div>
+  </div>
+  <!-- ko if: $data.deletingDs -->
+  <div id="delete-data-dialog" class="dropdown-dialog" data-bind="style: {top: delDialogTop() + 'px', left: delDialogLeft() + 'px'}">
+    <p>
+      Are you sure you want to delete this data source?
+    </p>
+    <div class="btn-large delete" tabindex="0"
+         data-bind="event: {click: btnConfirmDeleteDs, keypress: btnKeyPress}">
+      <div class="content">
+        Delete Data Source
+      </div>
+    </div>
+    <div class="btn-large cancel" tabindex="0"
+         data-bind="event: {click: hideDeleteDsDialog, keypress: btnKeyPress}">
+      <div class="content">
+        Cancel
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <div data-bind="template: {name: 'tmpl-new-data-source',
+                             data: newDsView,
+                             if: newDsView,
+                             afterRender: newDsView().initDataSourceView}">
+  </div>
+</div>
+{% endblock %}

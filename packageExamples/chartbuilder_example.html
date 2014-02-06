@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script>
+      // for testing IE, remove array.indexOf
+      // delete Array.prototype.indexOf;
+    </script>
+
+    <link rel="stylesheet" href="static/dependencies.css" />
+    <link rel="stylesheet" href="static/main.css" />
+
+    <script src="static/dependencies.js"></script>
+    <script src="static/main.js"></script>
+
+    <style>
+      #foo {
+        height: 21px;
+        padding: 9px;
+        z-index: 1000;
+
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="foo">
+      Playground to testing serialization and deserialization
+      <button id="serialize">Serialize State</button>
+      <button id="deserialize">Input a Serialized State</button>
+      <button id="view">View Serialized Chart</button>
+    </div>
+    <div id="chart"></div>
+
+    <script>
+      var poly = require('poly');
+      var demoData = [
+        {
+          name: 'Email',
+          data: require('poly/demoData/email').emails,
+          meta: {
+            id: { type: 'num' },
+            template_id: { type: 'cat' },
+            created: { type: 'date' },
+            success: { type: 'cat' },
+            message_hash: { type: 'cat' },
+            source: { type: 'cat' }
+          }
+        },
+        {
+          name: 'Content',
+          data: require('poly/demoData/content').content,
+          meta: {
+            user_id: { type: 'cat' },
+            created: { type: 'date' },
+            dataset_id: { type: 'num' },
+            title: { type: 'cat' },
+            public: { type: 'cat' },
+          }
+        }
+      ];
+
+      var default_spec = {
+        dom: $('#chart')[0],
+        width: '100%',
+        height: 600,
+        dataCollection: {
+          type: 'local',
+          tables: demoData
+        },
+        initial: {"layers":[{"type":"bar","x":{"var":"template_id"},"tableName":"Email","y":{"var":"count(id)"},"color":{"var":"success"},"sample":500}],"coord":{"type":"cartesian","flip":false},"width":796,"height":475}
+      }
+      polychart_global = poly.chartbuilder(default_spec);
+      $('#serialize').click(function() {
+        alert(JSON.stringify(polychart_global.serialize()))
+      });
+      $('#deserialize').click(function() {
+        str = prompt("Enter a serialized string (click 'Serialize State' to get one).");
+        default_spec.initial = JSON.parse(str);
+        polychart_global = poly.chartbuilder(default_spec);
+      });
+      $('#view').click(function() {
+        str = prompt("Enter a serialized string (click 'Serialize State' to get one).");
+        polychart_global = poly.chartviewer({
+          dom: $('#chart')[0],
+          dataCollection: [{type: 'local', tables: demoData}],
+          initial: JSON.parse(str)
+        })
+      });
+
+    </script>
+  </body>
+</html>
+

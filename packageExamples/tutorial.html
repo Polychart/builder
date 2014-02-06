@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script>
+      // for testing IE, remove array.indexOf
+      // delete Array.prototype.indexOf;
+    </script>
+
+    <link rel="stylesheet" href="static/dependencies.css" />
+    <link rel="stylesheet" href="static/main.css" />
+
+    <script src="static/dependencies.js"></script>
+    <script src="static/main.js"></script>
+  </head>
+  <body>
+    <div id="chart"></div>
+
+    <script>
+      var poly = require('poly');
+      var polyObj = poly.dashboard({
+      name: "Tutorial",
+      dom: $('#chart')[0],
+      showTutorial: true,
+      header: false,
+      width: 'fill',
+      height: 'fill',
+      isDemo: true,
+      dataCollection: [{
+        type: 'local',
+        tables: [{
+            name: 'User Data',
+            data: require('poly/demoData/users').users,
+            meta: {
+              id: { type: 'num' },
+              signup_date: { type: 'date' },
+              gender: { type: 'cat' },
+              time_on_site: { type: 'num' },
+            }
+          },
+          {
+            name: 'Sales Data',
+            data: require('poly/demoData/sales').sales,
+            meta: {
+              date : { type: 'date' },
+              income: { type: 'num' },
+              expense: { type: 'num' },
+            }
+          }
+        ]
+      }]
+    });
+
+    </script>
+  </body>
+</html>
+

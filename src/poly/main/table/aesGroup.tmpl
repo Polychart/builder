@@ -1,0 +1,33 @@
+<script type='text/html' id='tmpl-aesgroup'>
+  <h1 class="underlined" data-bind="text: aesName"></h1>
+  <div class="menu-item-container"
+       data-dnd-type="metric"
+       data-bind="pui_dndContainer: {
+                  itementer:onMetricEnter,
+                  datatype:'metric',
+                  name:'addmetric'},
+                  css: {disabled: !enabled()}">
+    <div class="menu-item-name">
+      <div class="content">Add Metric</div>
+    </div>
+    <div class="menu-item">
+      <!-- ko template: {name: 'tmpl-metric-droppable', data: {enabled: enabled()}} --><!-- /ko -->
+    </div>
+  </div>
+
+  <div>
+    <!-- ko foreach: metrics -->
+      <div class="menu-item-container" data-dnd-type="metric" data-bind="pui_dndContainer: {itemdiscard:discard,datatype:'metric',name:name}, css: {disabled: !$parent.enabled()}">
+        <div class="menu-item-name">&nbsp;</div>
+        <div class="menu-item dropped-metric" data-bind="template: {
+          data: $data,
+          name: 'tmpl-metric-attached',
+          afterRender: $parent.initMetricItem,
+        }">
+        </div>
+      </div>
+    <!-- /ko -->
+  </div>
+
+</script>
+

@@ -1,0 +1,51 @@
+{% extends "oldBase.tmpl" %}
+{% block body %}
+<div id="errorScreen" class="main">
+  {% if error == 'auth' %}
+  <div class="syncError">
+    Invalid username or password.
+  </div>
+  {% elif error %}
+  <div class="syncError">
+    An unknown error occured.  Please try again later!
+  </div>
+  {% endif %}
+</div>
+
+<section class="main halfwidth cf">
+  <h3>Log In</h3>
+  {% if settings.SIGNUP_ENABLED %}
+  <p>
+    Don't have an account? <a href="/signup">Sign up for one here</a>, it's free!
+  </p>
+  {% endif %}
+  {% if settings.PASSWORD_RESET_ENABLED %}
+  <p>
+    If you already have an account but you've forgot your password, <a href="/forgot-password">click here</a>.
+  </p>
+  {% endif %}
+
+  <form class="siteForm" action="/login" method="POST">
+    <input type="hidden" name="next" value="{{ redirectUrl }}"/>
+    {% csrf_token %}
+
+    <div class="field">
+      <label class="inputDesc">username or email</label>
+      <div class="inputField">
+        <input type="text" name="username" value="{{ username }}" autofocus />
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="inputDesc">password</label>
+      <div class="inputField">
+        <input type="password" name='password' />
+      </div>
+    </div>
+
+    <div>
+      <input id="loginSubmitBtn" type='submit' class='btn small' value='Login'></input>
+    </div>
+  </form>
+</section>
+{% endblock %}

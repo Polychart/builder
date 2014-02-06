@@ -1,0 +1,17 @@
+# Sample nginx config for use with onprem.
+# To be used in documentation that is coming soon!
+
+server {
+  listen 80;
+  server_name localhost;
+
+  location / {
+    proxy_pass http://localhost:7000;
+    proxy_set_header Host $http_host;
+    proxy_redirect http:// https://;
+  }
+
+  location /static {
+    alias /polychart-onprem/static;
+  }
+}

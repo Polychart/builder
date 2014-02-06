@@ -1,0 +1,26 @@
+{% extends "base.tmpl" %}
+
+{% block title %}Connecting data source...{% end %}
+
+{% block body %}
+  {% if result['status'] == 'error' %}
+    <div class="error">
+      <h1>Oh, no!</h1>
+      <p>
+        Unfortunately, we were not able to connect your data source to Polychart.
+      </p>
+      {% if result['error']['type'] == 'connection' %}
+        <p><code>{{ result['error']['message'] }}</code></p>
+        <p>
+          If you're not sure how to resolve this issue,
+          feel free to contact us via the link in the bottom right corner.
+        </p>
+      {% else %}
+        <p>
+          We're not quite sure what went wrong.
+          Please contact us via the link in the bottom right to resolve this issue.
+        </p>
+      {% end %}
+    </div>
+  {% endblock %}
+{% endblock %}

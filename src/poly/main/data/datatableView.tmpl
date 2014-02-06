@@ -1,0 +1,263 @@
+<script type='text/html' id='tmpl-datatableviewer'>
+<div class='menu-panel'>
+  <div class="menu-container">
+    <!-- ko if: canAddVar -->
+    <div class="menu-section" data-bind="template:{ data: editView, name: 'tmpl-datatable-edit'}"></div>
+    <div class="menu-section" data-bind="template: { data: autocompleteView, name: 'tmpl-datatable-newcol', afterRender: initAutocomplete }"></div>
+    <!-- /ko -->
+  </div>
+</div>
+
+<div class='content-panel'>
+  <div class="buttons cf">
+    <div data-bind="click: navigateBack" class="btn-flat cf">
+      <img src="/static/main/images/icon_back_white.svg" />
+      <div class="content">Go Back</div>
+    </div>
+  </div>
+  <div class='chart-container'>
+    <!-- ko if: errorMessage -->
+      <div class="datatable-error" data-bind="text:errorMessage"></div>
+    <!-- /ko -->
+
+    <!-- ko ifnot: errorMessage -->
+      <!-- ko template: { name: 'tmpl-datatable-slickgrid', afterRender: initSlickgridDom } --><!-- /ko -->
+    <!-- /ko -->
+
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-datatable-slickgrid'>
+  <div class='datatable-slickgrid'></div>
+</script>
+
+<script type='text/html' id='tmpl-datatable-edit'>
+<!-- ko if: metricViews().length -->
+  <h1>Edit Columns</h1>
+  <!-- ko foreach: metricViews() -->
+  <div class="menu-item-container">
+    <div class="edit-metric-content">
+      <div class="metric-name" data-bind="text: metric.name"></div>
+      <a data-bind="click: deleteMetric">delete</a>
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+  <!-- /ko -->
+</script>
+
+<script type='text/html' id='tmpl-datatable-newcol'>
+<h1>New Column</h1>
+<div class="menu-item-container">
+  <div class="menu-item-name">
+    <div class="content">Name</div>
+  </div>
+  <div class="menu-item">
+    <input type="text" name="alias" class="formula-alias" data-bind="value: alias"/>
+  </div>
+</div>
+<div class="menu-item-container">
+  <div class="menu-item-name">
+    <div class="content formula">Formula</div>
+  </div>
+  <div class="menu-item">
+    <input type="text" name="formula" class="formula-input" data-bind="value: formula"/>
+    <a class='help-docs' data-bind="click: openHelp">(open help docs)</a>
+  </div>
+</div>
+<!-- ko if: errorMessage != '' -->
+<div class="menu-item-container">
+  <span data-bind="text: errorMessage"></span>
+</div>
+<!-- /ko -->
+
+<div class="btn-large" data-bind="click: addItem">
+  Add Column
+</div>
+</script>
+
+<script type="text/html" id="tmpl-formula-docs">
+  <div class="formula-close" data-bind="click: closeHelp"></div>
+  <h1 class="underlined">New Column Formula: Syntax and Functions</h1>
+  <div class="formula-inner-scrollable">
+    <div class='formula-section'>General</div>
+    <table>
+      <tr>
+      <td colspan=2>
+        You can use a formula to create new, derived columns based on
+        existing data columns. The formulas can use any of the below
+        structures and functions, and reference any existing columns.<br />
+      <td>
+      <tr>
+        <td class="formula-function">Referencing Columns</td>
+        <td class="formula-explanation">
+          Refer to other columns by typing "[" and selecting the appropriate column that appears in the dropdown.<br/>
+          e.g. [X], [y]
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">Calling Functions</td>
+        <td class="formula-explanation">
+          Call functions using the function name, and brackets enclosing parameters. <br />
+          e.g. log([x]), indexOf([x], "a")
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">Control Flow</td>
+        <td class="formula-explanation">
+          To evaluate one of two expressions based on a conditional, use the expression <b>if [cond] then [conseq] else [altern]</b>. Make sure that the [conseq] and [altern] are of the same type (both should be numbers, categories, or dates)<br />
+          e.g. if indexOf([x], "a") == -1 then "aNotInX" else "aInX"
+        </td>
+      </tr>
+
+
+    </table>
+
+
+    <div class="formula-section-spacing"></div>
+
+    <div class='formula-section'>Numeric Functions</div>
+    <table>
+      <tr>
+        <td class="formula-function">+, -, *, /, %</td>
+        <td class="formula-explanation">
+          adding, subtracting, multiplying, dividing, and taking modulos of two numbers
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">&lt;, &lt;=, &gt;, &gt;=, !=, ==</td>
+        <td class="formula-explanation">
+          evaluations of equalities and inequalities
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">log</td>
+        <td class="formula-explanation">
+          takes the logarithm of a number
+        </td>
+      </tr>
+    </table>
+
+    <div class="formula-section-spacing"></div>
+
+    <div class='formula-section'>String Functions</div>
+    <table>
+      <tr>
+        <td class="formula-function">++</td>
+        <td class="formula-explanation">
+          concatenates two strings<br/>
+          e.g. "A" ++ "B" = "AB"
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">substr</td>
+        <td class="formula-explanation">
+          take a substring of a string at the desired starting location and length<br/>
+          e.g. substr("hello", 1, 2) = "el"
+        </td>
+      </tr>
+
+      <tr>
+        <td class="formula-function">length</td>
+        <td class="formula-explanation">
+          finds the length of a string<br/>
+          e.g. length("hello") = 5
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">upper</td>
+        <td class="formula-explanation">
+          make all letters in a string upper case<br/>
+          e.g. upper("myString500") = "MYSTRING500"
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">lower</td>
+        <td class="formula-explanation">
+          make all letters in a string lower case<br/>
+          e.g. lower("myString500") = "mystring500"
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">indexOf </td>
+        <td class="formula-explanation">
+          return the first index at which a substring occurs in a string, or -1 if it does not exist<br/>
+          e.g. indexOf("myString500", "String") = 2<br/>
+         indexOf("haystack", "needle") = -1
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">parseNum </td>
+        <td class="formula-explanation">
+          turn a string into a number<br/>
+          e.g. parseNum("500") = 500
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">parseDate</td>
+        <td class="formula-explanation">
+          turn a string into a date; with an optionally specified format<br/>
+          e.g. parseDate("2012-03-05") = 2012-03-05<br/>
+          parseDate("2012-03-05", "YYYY-MM-DD") = 2012-03-05
+        </td>
+      </tr>
+    </table>
+
+    <div class="formula-section-spacing"></div>
+
+    <div class="formula-section">Date Functions</div>
+    <table>
+      <tr>
+        <td class="formula-function">year</td>
+        <td class="formula-explanation">
+          extracts the year from a date
+        </td>
+      </td>
+      <tr>
+        <td class="formula-function">month</td>
+        <td class="formula-explanation">
+          extracts the month from a date, in integers, where January is month 1
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">dayOfMonth</td>
+        <td class="formula-explanation">
+          extracts the day of the month from a date
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">dayOfYear</td>
+        <td class="formula-explanation">
+          extracts the day of the year from a date
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">dayOfWeek</td>
+        <td class="formula-explanation">
+          extracts the day of the week from a date, where Sunday is 0, Saturday is 6
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">hour</td>
+        <td class="formula-explanation">
+          extracts the hour from a date, from 0 to 23
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">minute</td>
+        <td class="formula-explanation">
+          extracts the minute from a date
+        </td>
+      </tr>
+      <tr>
+        <td class="formula-function">second </td>
+        <td class="formula-explanation">
+          extracts the second from a date
+        </td>
+      </tr>
+    </table>
+
+
+  </div>
+</script>

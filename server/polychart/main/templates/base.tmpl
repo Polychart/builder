@@ -1,0 +1,26 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="{% static 'common/images/favicon.ico'%}" />
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'common/dependencies.css' %}" />
+    <link rel="stylesheet" href="{% static 'main/main.css' %}" />
+
+    {% block styles %}
+    {% endblock %}
+
+    <script src="{% static 'common/dependencies.js' %}"></script>
+    <script src="{% static 'main/main.js' %}"></script>
+
+    {% block scripts %}
+    {% endblock %}
+  </head>
+  <body>
+    {% block body %}{% endblock %}
+
+  </body>
+</html>

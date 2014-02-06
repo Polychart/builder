@@ -1,0 +1,28 @@
+<script type='text/html' id='tmpl-numeralbuilder'>
+<div class='menu-panel'>
+  <div class="menu-container">
+    <h1>Value</h1>
+    <!-- ko with: value -->
+    <div data-bind= "template: {name: template, afterRender: afterRender}"></div>
+    <!-- /ko -->
+    <!-- ko template: {name: 'tmpl-filters', data: filtersView } --><!-- /ko -->
+  </div>
+</div>
+<div class='content-panel'>
+  <div class="buttons cf">
+    <!-- ko if: backButtonVisible() -->
+    <div data-bind="click: backToDashboard" class="btn-flat cf">
+      <img src="/static/main/images/icon_back_white.svg" />
+      <div class="content">Return to Dashboard</div>
+    </div>
+    <!-- /ko -->
+  </div>
+  <div class='chart-container'>
+    <!-- ko template: {name: 'tmpl-numeralbuilder-inner', afterRender: initDom } --><!-- /ko -->
+  </div>
+</div>
+</script>
+
+<script type="text/html" id='tmpl-numeralbuilder-inner'>
+<div class='chartbuilder-chart'></div>
+</script>

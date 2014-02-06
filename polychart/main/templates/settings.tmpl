@@ -1,0 +1,101 @@
+{% extends "oldBase.tmpl" %}
+
+{% block body %}
+{% if result == 'success' %}
+<div class="syncError info">
+  {% if action == 'update-info' %}
+  Your account information has been updated.
+  {% elif action == 'change-pswd' %}
+  Your password has been changed.
+  {% endif %}
+</div>
+{% elif result == 'error' %}
+<div class="syncError">
+  {{ errorMsg }}
+</div>
+{% endif %}
+
+<div class="main cf">
+  <section>
+    <h3>Personal Information</h3>
+
+    <form class="siteForm twoCol" action='/settings' method='POST'>
+      {% csrf_token %}
+      <input type='hidden' name='action' value="update-info" />
+      <div class="field">
+        <label class="inputDesc">Username</label>
+        <div class="inputField">
+          <input type="text" disabled="disabled" value="{{ user }}"></input>
+        </div>
+      </div>
+      <div class="clearboth"></div> <!-- force linebreak even when there are errors -->
+
+      <div class="field">
+        <label class="inputDesc">Full Name</label>
+        <div class="inputField">
+          {{ userinfo_form.name }}
+        </div>
+        {{ userinfo_form.name.errors }}
+      </div>
+      <div class="field">
+        <label class="inputDesc">Email</label>
+        <div class="inputField">
+          {{ userinfo_form.email }}
+        </div>
+        {{ userinfo_form.email.errors }}
+      </div>
+      <div class="clearboth"></div> <!-- force linebreak even when there are errors -->
+      <div class="field">
+        <label class="inputDesc">Company</label>
+        <div class="inputField">
+          {{ userinfo_form.company }}
+        </div>
+        {{ userinfo_form.company.errors }}
+      </div>
+      <div class="field">
+        <label class="inputDesc">Website</label>
+        <div class="inputField">
+          {{ userinfo_form.website }}
+        </div>
+        {{ userinfo_form.website.errors }}
+      </div>
+
+      <div>
+        <input type='submit' class='btn small' value="Update Info" />
+      </div>
+    </form>
+  </section>
+
+  <section>
+    <h3>Change Password</h3>
+    <form class="siteForm" action='/settings' method='POST'>
+      {% csrf_token %}
+      <input type='hidden' name='action' value="change-pswd" />
+      <div class="field">
+        <label class="inputDesc">Current Password</label>
+        <div class="inputField">
+          {{ password_form.old }}
+        </div>
+        {{ password_form.old.errors }}
+      </div>
+      <div class="field">
+        <label class="inputDesc">New Password</label>
+        <div class="inputField">
+          {{ password_form.new }}
+        </div>
+        {{ password_form.new.errors }}
+      </div>
+      <div class="field">
+        <label class="inputDesc">Repeat New Password</label>
+        <div class="inputField">
+          {{ password_form.veri }}
+        </div>
+        {{ password_form.veri.errors }}
+      </div>
+      <div>
+        <input type='submit' class='btn small' value="Change Password" />
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}

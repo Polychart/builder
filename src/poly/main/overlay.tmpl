@@ -1,0 +1,81 @@
+<script type='text/html' id='tmpl-overlay-container'>
+<div id='dialog-container' data-bind="visible: dialog">
+  <!-- ko if: dialog() -->
+  <div data-bind="template: {
+      name: dialog().template,
+      data: dialog().view,
+    }"></div>
+  <!-- /ko -->
+</div>
+<div id='dropdown-container'>
+  <!-- ko if: dropdown() -->
+  <div data-bind="template: {
+    name: 'tmpl-overlay-dropdown-dialog',
+    data: dropdown,
+    afterRender: layoutDropdown
+  }"></div>
+  <!-- /ko -->
+</div>
+<div id="shadeOverlay" data-bind="css: {active: shadeVisible}">
+</div>
+</script>
+
+<script type='text/html' id='tmpl-dropdown-no-icon'>
+<div>
+  <div class="name">
+  </div>
+  <div class="metric-option-arrow">
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-dropdown'>
+<div>
+  <div class="select-icon"></div>
+  <div class="name">
+  </div>
+  <div class="metric-option-arrow">
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-overlay-dropdown-dialog'>
+<div class="dropdown-dialog">
+  <div class="cover-top"></div>
+  <div data-bind="template: {
+    name: templateName,
+    data: data,
+  }"></div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-dropdown-single-menu'>
+<div class="dropdown-single-menu">
+  <!-- ko foreach: options -->
+  <div class="option"
+       data-bind="
+        click: $data.handler,
+        visible: $data.selected()[1] != $data.value || $data.selected()[0] != $data.text
+        ">
+    <!-- ko if: $data.iconClass -->
+    <div data-bind="attr: {class: $data.iconClass}"></div>
+    <!-- /ko -->
+    <div class="name" data-bind="html: $data.text"></div>
+  </div>
+  <!-- /ko -->
+</div>
+</script>
+
+<script type="text/html" id="tmpl-dropdown-multi-menu">
+<div class="dropdown-multi-menu">
+  <!-- ko foreach: options -->
+  <div class="option"
+       data-bind="
+       click: $data.handler,
+       css: { checked: $data.selected }
+       ">
+    <div class="name" data-bind="html: $data.text"></div>
+  </div>
+  <!-- /ko -->
+</div>
+</script>

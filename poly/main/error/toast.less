@@ -1,0 +1,109 @@
+// CSS required to style the jquery toast.
+
+.toast-container {
+	width: 280px;
+	z-index: 9999999;
+}
+
+* html .toast-container {
+	position: absolute;
+}
+
+.toast-item {
+	display: block;
+	height: auto;
+	position: relative;
+  font-size: @fontSizeNormal;
+  //font-weight: @semibold; // font-size: @normalSize;
+  margin-bottom: 1em;
+  padding: .5em .7em;
+
+  p {
+    // font-family: @sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    A, A:link, A:visited{
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+
+  .toast-item-close {
+    opacity: 0.5;
+    cursor: pointer;
+    height: 1em;
+    width: 1em;
+    position: absolute;
+    right:7px;
+    top:7px;
+  }
+
+  .toast-item-close:hover {
+    opacity: 1;
+  }
+
+  /**
+   * toast types
+   *
+   * pattern: toast-type-[value]
+   * where 'value' is the real value of the plugin option 'type'
+   *
+   */
+  &.toast-type-notice, &.toast-type-success {
+    #poly .error-raise(@darkGreen);
+  }
+
+  &.toast-type-warning, &.toast-type-error {
+    #poly .error-raise(@polyOrange);
+  }
+}
+
+/**
+ * positions
+ *
+ * pattern: toast-position-[value]
+ * where 'value' is the real value of the plugin option 'position'
+ *
+ */
+.toast-position-top-left {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+}
+
+.toast-position-top-center {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  margin-left: -140px;
+}
+
+.toast-position-top-right {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.toast-position-middle-left {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  margin-top: -40px;
+}
+
+.toast-position-middle-center {
+  position: fixed;
+  left: 50%;
+  margin-left: -140px;
+  margin-top: -40px;
+  top: 50%;
+}
+
+.toast-position-middle-right {
+  position: fixed;
+  right: 20px;
+  margin-left: -140px;
+  margin-top: -40px;
+  top: 50%;
+}

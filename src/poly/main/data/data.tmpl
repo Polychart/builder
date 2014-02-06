@@ -1,0 +1,10 @@
+<script type='text/html' id='tmpl-data-panel'>
+  <div class="data-panel">
+    <h1>Data</h1>
+    <div class="scroll" data-bind="template: {
+      foreach: tableViews,
+      name: 'tmpl-table-metric-list',
+      afterRender: initTable,
+     }"></div>
+  </div>
+</script>

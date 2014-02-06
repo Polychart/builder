@@ -1,0 +1,22 @@
+<script type='text/html' id='tmpl-workspace'>
+<div class='content-panel' data-bind="css: {viewer: isViewer}">
+  <!-- ko if: isViewer -->
+  <div class="workspace-title" data-bind="text: title"></div>
+  <!-- /ko -->
+  <!-- ko ifnot: isViewer -->
+  <div class="workspace-title"
+       contenteditable="true"
+       data-bind="pui_contentEditable: title,
+                  pui_placeholder: 'Untitled Dashboard'"></div>
+  <!-- /ko -->
+  <div class='workspace-area'>
+    <div class='workspace-panel' data-bind="css: {viewer: isViewer}">
+      <div class='workspace-items' data-bind="css: {viewer: isViewer}">
+        <!-- ko foreach: items -->
+        <!-- ko template: { name: templateName, afterRender: init }  --><!-- /ko -->
+        <!-- /ko -->
+      </div>
+    </div>
+  </div>
+</div>
+</script>

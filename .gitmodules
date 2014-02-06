@@ -1,0 +1,3 @@
+[submodule "lib/polychart2"]
+	path = lib/polychart2
+	url = git@github.com:Polychart/polychart2.git

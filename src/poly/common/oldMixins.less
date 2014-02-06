@@ -1,0 +1,263 @@
+@import "bootstrapMixins.less"; // Twitter bootstrap mixin.
+@import "fonts.less";
+
+// #poly namespace.
+// Less functions used in Polychart.js, namespaced under #poly namespace.
+#poly {
+
+  // Variables
+
+  .colors() {
+    @polyOrange: #F58029;
+    @polyDarkGray: #161616;
+    @polyGreen: #52B848;
+    @polyYellow: #FFF200;
+    @polyMint: #62bf9c;
+
+    @twitterBlue: #28aae1;
+    @medGray: #c4c4c4;
+    @bigBonedGray: #4a4a4a;
+    @heavyGray: #1c1c1c;
+    @lightGray: #e4e4e4;
+    @faintGray: #f3f3f3;
+    @darkMint: #3c9472;
+    @lightMint: #e9faf4;
+  }
+  .colors;
+
+  .fonts() {
+    @serif: "adelle", "serif";
+    @body: "garamond-premier-pro-caption", "georgia", "serif";
+    @sans-serif: "Source Sans Pro", "helvetica", "sans-serif";
+    @header: "brandon-grotesque", "helvetica", "sans-serif";
+
+    @bold: 700;
+    @semibold: 600;
+    @medium: 500;
+    @light: 300;
+
+    @tinySize: 0.85em;
+    @defaultSize: 0.95em;
+    @normalSize: 1.1em;
+    @medSize: 1.55em;
+    @largeSize: 2em;
+    @xLargeSize: 3.3em;
+  }
+  .fonts;
+
+  .spacing() {
+    @smallSpace: .3em;
+    @medSpace: .6em;
+    @largeSpace: 1em;
+    @xLargeSpace: 2em;
+
+    @fullWidth: 61.5em;
+  }
+  .spacing;
+
+  // Helper functions
+
+  .border-radius-top-left (@radius: 5px) {
+    border-top-left-radius: @radius;
+  }
+
+  .border-radius-top-right (@radius: 5px) {
+    border-top-right-radius: @radius;
+  }
+
+  .border-radius-bottom-left (@radius: 5px) {
+    border-bottom-left-radius: @radius;
+  }
+
+  .border-radius-bottom-right (@radius: 5px) {
+    border-bottom-right-radius: @radius;
+  }
+
+  .border-radius-left (@radius: 5px) {
+    .border-radius-top-left(@radius);
+    .border-radius-bottom-left(@radius);
+  }
+
+  .border-radius-right (@radius: 5px) {
+    .border-radius-top-right(@radius);
+    .border-radius-bottom-right(@radius);
+  }
+
+  .border-radius-top (@radius: 5px) {
+    .border-radius-top-left(@radius);
+    .border-radius-top-right(@radius);
+  }
+
+  .opacity (@alpha: 1) {
+    opacity: @alpha / 100;
+    filter:alpha(opacity=@alpha);
+  }
+
+  .appearance (@val) {
+    -webkit-appearance: @val;
+    -moz-appearance: @val;
+  }
+
+  .box-shadow(@x, @y, @blur, @color) {
+    -moz-box-shadow: @x @y @blur @color;
+    -webkit-box-shadow: @x @y @blur @color;
+    box-shadow: @x @y @blur @color;
+  }
+
+  .inner-shadow(@x, @y, @blur, @color) {
+    -moz-box-shadow: inset @x @y @blur @color;
+    -webkit-box-shadow: inset @x @y @blur @color;
+    box-shadow: inset @x @y @blur @color;
+  }
+
+  .text-shadow(@x, @y, @blur, @color) {
+    -moz-text-shadow: @x @y @blur @color;
+    -webkit-text-shadow: @x @y @blur @color;
+    text-shadow: @x @y @blur @color;
+  }
+
+  .inner-border {
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .box-arrow(@position: top, @offset:50%, @size:4px, @background-color:white,
+  @border-width:2px, @border-color:@medGray) {
+    &:after, &:before {
+      bottom: 100%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    &:after {
+      .b(@position, @background-color);
+      border-width: @size;
+      left: @offset;
+      margin-left: @size * -1;
+    }
+    &:before {
+      .b(@position, @border-color);
+      border-width: @size + @border-width ;
+      left: @offset;
+      margin-left: ( @size + @border-width ) * -1;
+    }
+    .b(top, @border-color)   {
+      border-bottom-color: @border-color;
+    }
+    .b(right, @border-color) {
+      border-left-color:   @border-color;
+    }
+    .b(bottom, @border-color){
+      border-top-color:    @border-color;
+    }
+    .b(left, @border-color)  {
+      border-right-color:  @border-color;
+    }
+  }
+
+  // UI Components
+
+  .btn-raise {
+    .user-select(none);
+    #poly .inner-shadow(0, 1px, 0, white);
+
+    color: @polyDarkGray;
+    background-color: @faintGray;
+    border: 1px solid @medGray;
+  }
+
+  .btn-raise-hover {
+    #poly .btn-raise;
+
+    #gradient .vertical(@lightGray, @faintGray);
+  }
+
+  .btn-raise-active {
+    #poly .btn-raise;
+    #poly .inner-shadow(0, 1px, 0, @medGray);
+
+    #gradient .vertical(darken(@lightGray, 5%), @faintGray);
+  }
+
+  .input-raise {
+    .border-radius;
+
+    border: 1px solid @medGray;
+    margin: 0;
+    padding: .4em 0 .5em;
+    font-size: @defaultSize;
+  }
+
+  .error-raise(@backgroundColor:@polyOrange) {
+    .border-radius;
+    #poly .box-shadow(0, 1px, 0, @medGray);
+    #poly .text-shadow(0, -1px, 0, darken(@backgroundColor, 20%));
+    #gradient .vertical(@backgroundColor, darken(@backgroundColor, 5%));
+
+    background-color: @backgroundColor;
+    border: 1px solid darken(@backgroundColor, 20%);
+    color: white;
+  }
+
+  // General layout
+
+  .-position() {
+    position: absolute; left: 0px; right: 0px;
+  }
+  .fullheight-absolute() {
+    position: absolute;
+    bottom: 0px;
+    top: 0px;
+  }
+  .prevent-text-select() {
+    // Refer to the Stack overflow post.
+    // http://stackoverflow.com/questions/826782/css-rule-to-disable-text-selection-highlighting
+    // for more info on this.
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  // functions used to generate footer and header.
+  // Way you would use this:
+  // 1. in the parent DOM, add the .panel mixin.
+  // 2. for the header / center / footer DOM, add the .header, .footer, .center
+  // mixins
+  .panel() {
+    position: relative;
+  }
+
+  .footer(@height) {
+    .-position();
+    bottom: 0px;
+    height: @height;
+  }
+
+  .header(@height) {
+    .-position();
+    top: 0px;
+    height: @height;
+  }
+
+  .center(@headerHeight:0px, @footerHeight:0px) {
+    .-position();
+    top: 0px; bottom: 0px;
+    margin-top: @headerHeight;
+    margin-bottom: @footerHeight;
+  }
+
+  .transition(@duration:0.2s, @ease:ease-out) {
+    -webkit-transition: all @duration @ease;
+    -moz-transition: all @duration @ease;
+    -o-transition: all @duration @ease;
+    transition: all @duration @ease;
+  }
+}

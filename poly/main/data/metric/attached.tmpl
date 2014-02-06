@@ -1,0 +1,81 @@
+<script type='text/html' id='tmpl-metric-attached'>
+  <div class="metric" data-bind="click: toggleDropdown, css: extraCSS">
+    <div class="metric-icon" data-bind="css: type"></div>
+    <div class="metric-name" data-bind="text: visibleName"></div>
+    <!-- ko if: name != 'count(*)' -->
+    <div class="metric-option-arrow"></div>
+    <!-- /ko -->
+  </div>
+</script>
+
+<script type='text/html' id='tmpl-metric-option'>
+<div class="metric-option">
+  <div class="metric-option-item" data-bind="template: {name: 'tmpl-metric-tableName'}">
+  </div>
+
+  <!-- ko if: ((type == 'num' || type == 'date') && stats() == 'None') -->
+  <div class="metric-option-item" data-bind="template: {name: 'tmpl-metric-option-bin', afterRender: initSlider}">
+  </div>
+  <!-- /ko -->
+
+  <div class="metric-option-item" data-bind="template: {name: 'tmpl-metric-option-stats'}"></div>
+  <!-- ko if: type == 'cat' -->
+  <div class="metric-option-item" data-bind="template: {name: 'tmpl-metric-option-sort'}"></div>
+  <!-- /ko -->
+  <div class="btn-large" data-bind="click: discard">
+    <img src="/static/main/images/icon_close.png" />
+    <div class="content" data-bind="text: removeText">
+    </div>
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-metric-tableName'>
+<div class="metric-option-item-title">
+  Table:
+</div>
+<div class="metric-option-item-container">
+  <span data-bind="text:columnInfo.meta.tableName" />
+</div>
+</script>
+
+<script type='text/html' id='tmpl-metric-option-bin'>
+<div class="metric-option-item-title">
+  Bin Size:
+</div>
+<!-- ko if: binoptional -->
+<input class="metric-option-item-checkbox" type="checkbox" data-bind="checked:binned">
+</input>
+<!-- /ko -->
+<div class="metric-option-item-container">
+  <div class="slider-container">
+    <div class="slider selector"></div>
+    <div class="slider-value">
+      <span data-bind="text: binwidth"></span>
+    </div>
+
+  </div>
+
+</div>
+
+</script>
+
+<script type='text/html' id='tmpl-metric-option-stats'>
+<div class="metric-option-item-title">
+  Stats:
+</div>
+<div class="metric-option-item-container">
+  <select data-bind="options: statsList(), value: stats"></select>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-metric-option-sort'>
+<div class="metric-option-item-title">
+  Sort By:
+</div>
+<div class="metric-option-item-container">
+  <select data-bind="options: sortMetricList(), optionsText: sortMetricOptionText, value: sortMetric"></select>
+  <a data-bind="text: asc, click: toggleAsc"></a>
+</div>
+</script>
+

@@ -1,0 +1,339 @@
+// ui.less -- Interface components such as buttons
+
+INPUT {
+  #poly .box-sizing(border-box);
+  #poly .inner-shadow(0, 2px, 0, @black);
+  border: 1px solid @black;
+  font-size: 16px;
+  padding: 0 9px;
+}
+
+.btn-full-width {
+  #poly .gray-button();
+  #poly .rounded-corners(0);
+  #poly .box-sizing(border-box);
+
+  width: 100%;
+  height: 36px;
+  padding: 7px 15px;
+
+  background-color: @medGray;
+  color: white;
+  text-align: center;
+
+  #poly .inner-shadow(0, 2px, 0, lighten(@medGray, 5%));
+
+  &:hover, &:active {
+    #poly .rounded-corners(0);
+  }
+
+  .content {
+    #poly .clearfix;
+
+    * {
+      float: left;
+    }
+
+    .text {
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    IMG {
+      max-width: 20px;
+      margin-right: 8px;
+    }
+  }
+}
+
+.btn-large {
+  #poly .gray-button();
+
+  padding: 6px 10px;
+  margin: 10px 0;
+  text-align: center;
+
+  IMG {
+    float: left;
+    max-width: 15px;
+    margin-right: 6px;
+  }
+
+  .content {
+    display: inline-block;
+    height: 15px;
+    margin-top: 1px;
+
+    IMG {
+      margin: -4px 6px 0 0;
+    }
+  }
+
+  &.green {
+    #poly .green-button();
+  }
+
+  &.orange {
+    #poly .orange-button();
+  }
+}
+
+.btn-small {
+  padding: 6px 10px 0;
+  margin: 3px 10px 3px 0;
+  height: 21px;
+  border: 1px solid @medGray;
+  color: @darkerGray;
+  background-color: @lightGray;
+  text-decoration: none;
+  cursor: pointer;
+
+  #poly .rounded-corners();
+  #poly .user-select(none);
+  #poly .inner-shadow(0, 1px, 0, white);
+
+  IMG, DIV {
+    max-height: 15px;
+    float: left;
+  }
+
+  IMG {
+    margin-right: 5px;
+    width: 17px;
+  }
+}
+
+.btn-small:hover {
+  background-color: lighten(@lightGray, 3%);
+}
+
+.btn-small:active, .btn-small.active {
+  background-color: darken(@lightGray, 10%);
+  #poly .inner-shadow(0, 1px, 0, @medGray);
+}
+
+.btn-delete {
+  .btn-large();
+
+  margin-top: 0;
+
+  background-color: @lightRed;
+  border: 1px solid @red;
+  color: @black;
+
+  &:hover {
+    background-color: lighten(@lightRed, 3%);
+  }
+
+  &:active {
+    #poly .inner-shadow(0, 2px, 0, @red);
+
+    color: @black;
+    border: 1px solid @red;
+    background-color: darken(@lightRed, 10%);
+  }
+
+  .icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+    float: left;
+
+    background-image: url('/static/main/images/icon_close_red.svg');
+  }
+
+  .content {
+    float: left;
+    margin-top: 3px;
+    height: auto;
+
+    text-align: left;
+  }
+}
+
+.bolded {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.spc_lt {
+  margin-top: 30px;
+}
+
+.dropdown {
+  #poly .box-sizing(border-box);
+
+  position: relative;
+  height: 35px;
+  width: 175px;
+  padding: 10px 9px 9px;
+  margin-top: 0;
+  margin-bottom: 4px;
+
+  text-align: left;
+
+  .name {
+    float: left;
+
+    font-family: @sansSerif;
+  }
+}
+
+.dropdown-dialog {
+  #poly .box-shadow(0, 2px, 0, @black);
+  #poly .rounded-corners();
+  #poly .rounded-top-left-corner(0);
+
+  position: absolute;
+  margin-top: -10px;
+
+  background-color: white;
+  border: 1px solid @black;
+
+  .cover-top {
+    position: relative;
+    top: -2px;
+    height: 3px;
+
+    background-color: white;
+  }
+
+  .dropdown-content {
+    padding: 9px;
+  }
+}
+
+.dropdown-single-menu {
+  width: 173px;
+  min-height: 50px;
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  .option {
+    padding: 9px;
+    cursor: pointer;
+  }
+
+  .option:hover {
+    background-color: @lightGreen;
+  }
+}
+
+.dropdown-multi-menu {
+  width: 173px;
+  min-height: 50px;
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  .option {
+    padding: 9px;
+    cursor: pointer;
+
+    &.checked {
+      font-weight: 500;
+      background-color: @medGreen;
+    }
+  }
+
+  .option:hover {
+    background-color: @lightGreen;
+    &.checked {
+      font-weight: 500;
+      background-color: @medGreen;
+    }
+  }
+}
+
+.anim {
+  &.loading {
+    position: absolute;
+    background-size: 100%;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    max-height: 100%;
+    margin-left: -75px;
+    margin-top: -75px;
+    opacity: .5;
+  }
+}
+
+.progress-bar {
+  #poly .rounded-corners(8px);
+
+  height: 10px;
+  background-color: @lightGray;
+
+  .progress-complete {
+    #poly .rounded-corners(8px);
+
+    height: 10px;
+    background-color: @medGreen;
+  }
+
+  &.error {
+    background-color: @lightRed;
+
+    .progress-complete {
+      background-color: @polyOrange;
+    }
+  }
+}
+
+.progress-text {
+  font-family: @numeric;
+}
+
+LABEL.radioLabel {
+  cursor: pointer;
+  margin: 0 2em 0 .4em;
+  position: relative;
+  top: -.4em;
+  display: inline;
+}
+
+INPUT[type="radio"] {
+  display: none;
+}
+
+INPUT[type="radio"] + label {
+  #poly .box-shadow(0, 1px, 0, @lightGray);
+  #poly .inner-shadow(0, -1px, 0, @lightGray);
+
+  background-color: white;
+  border: 2px solid @medGray;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-block !important;
+  margin-top: .3em;
+  padding: 9px;
+  position: relative;
+  height: 0 !important;
+  width: 0 !important;
+}
+
+INPUT[type="radio"] + label:hover {
+  background-color: @faintGray;
+}
+
+INPUT[type="radio"]:checked + label:after {
+  #poly .box-shadow(0, 1px, 0, @lightGray);
+  background: @medGray;
+  //#gradient .vertical(@medGray, darken(@medGray, 20%));
+
+  content: ' ';
+  width: 12px;
+  height: 12px;
+  border-radius: 50px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  font-size: 32px;
+}
+
+INPUT[type="radio"]:checked + label {
+  background-color: white;
+}

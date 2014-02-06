@@ -1,0 +1,951 @@
+@import "../common/oldMixins.less";
+@import "toast.less";
+#poly .colors;
+#poly .fonts;
+#poly .spacing;
+
+/* TOP-LEVEL ELEMENTS */
+
+HTML, BODY {
+  color: @polyDarkGray;
+  font-family: @sans-serif;
+  font-size: 1em;
+  height: 100%;
+}
+
+H1, H2, H3 {
+  font-family: @serif;
+}
+
+H2 {
+  font-size: @xLargeSize;
+  font-weight: 100;
+  line-height: 1.3em;
+  margin-left: -.05em;
+}
+
+H3 {
+  color: @polyOrange;
+  font-size: @largeSize;
+  font-weight: normal;
+  font-variant: all-caps;
+  line-height: @normalSize;
+  margin-bottom: 0.7em;
+}
+
+H4 {
+  font-size: @defaultSize;
+  font-weight: bold;
+  line-height: 1.3em;
+}
+
+H5 {
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+SECTION {
+  margin-bottom: @xLargeSpace;
+}
+
+P {
+  font-size: @defaultSize;
+  font-family: @body;
+  line-height: 1.45em;
+  max-width: 29em;
+}
+
+P.large {
+  font-size: @normalSize;
+  line-height: 1.3em;
+  margin-bottom: 0.8em;
+}
+
+A, A:link, A:visited {
+  color: @polyOrange;
+  font-family: @sans-serif;
+  font-weight: @medium;
+  text-decoration: none;
+}
+
+A:hover, A:active {
+  color: darken(@polyOrange, 12%);
+  font-family: @sans-serif;
+  cursor: pointer;
+  cursor: hand;
+}
+
+::selection {
+  background: @lightGray;
+}
+
+INPUT, TEXTAREA {
+  color: @polyDarkGray;
+  font-family: @sans-serif;
+}
+
+::-webkit-input-placeholder {
+  color: @medGray;
+  font-family: @sans-serif;
+  font-size: @normalSize;
+  font-weight: lighter;
+  line-height: @normalSize;
+  padding-top: -0.5em;
+}
+
+INPUT:-moz-placeholder {
+  color: @medGray;
+  font-family: @sans-serif;
+  font-weight: lighter;
+  font-size: @defaultSize;
+}
+
+.hidden {
+  display: none;
+}
+
+SPAN.number {
+  font-family: "Helvetica";
+}
+
+.mobile_on {
+  display: none;
+}
+
+.mobile_off {
+  display: block;
+}
+
+/* LAYOUT */
+
+.container {
+  #poly .inner-border;
+
+  margin: 0;
+  min-height: 100%;
+  padding: 0 1.5em 100px;
+  position: relative;
+  min-width: @fullWidth + 3em;
+}
+
+HEADER, .main {
+  #poly .inner-border;
+
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+
+  #logo {
+    float: left;
+    max-width: 14em;
+    margin-top: -8px;
+  }
+}
+
+HEADER.new {
+  background-color: white;
+  border-bottom: 1px solid @medGray;
+  margin: 0 -1.5em;
+  margin-bottom: 70px;
+  padding: 17px 0 12px;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+
+  .main {
+    font-size: @normalSize;
+  }
+
+  #logo {
+    float: none;
+    margin-top: -1px;
+    max-width: 10em;
+  }
+
+  NAV {
+    display: inline;
+    float: right;
+    margin: 1px -20px -50px;
+
+    li {
+      display: inline-block;
+    }
+
+    a {
+      padding: 0 20px;
+      color: @heavyGray;
+      font-size: 0.8em;
+      font-weight: @semibold;
+      text-transform: uppercase;
+    }
+
+    #home{
+      color: @polyMint;
+    }
+
+    a:hover, #home:hover {
+      color: @darkMint;
+    }
+  }
+}
+
+#headerSpacing {
+  height: 85px;
+}
+
+NAV, FOOTER {
+  A, A:link, A:visited, A:active {
+    font-weight: normal;
+  }
+}
+
+HEADER {
+  margin: 0 auto 3em;
+  padding-top: 2.3em;
+  position: relative;
+
+  #social {
+    position: absolute;
+    right: 0;
+    top: @medSpace;
+
+    A {
+      margin-right: 0.5em;
+    }
+
+    A.last {
+      margin-right: 0;
+    }
+
+    IMG {
+      max-width: 1.1em;
+    }
+  }
+
+
+  NAV.topbar {
+    .border-radius;
+    #poly .btn-raise;
+    #poly .box-shadow(0, 2px, 2px, @faintGray);
+
+    font-size: @normalSize;
+    float: right;
+    height: 1.75em;
+    margin-top: 1px;
+    overflow: hidden;
+
+    UL, SECTION {
+      float: left;
+      height: 100%;
+    }
+
+    LI {
+      background-color: @faintGray;
+      float: left;
+      height: 100%;
+
+      A {
+        border-left: 1px solid @medGray;
+        color: @polyDarkGray;
+        cursor: pointer;
+        display: block;
+        height: 100%;
+        padding: 0 0.9em;
+        position: relative;
+
+        &:first-child {
+          border-left: 1px solid transparent;
+        }
+
+        &.withDropArrow {
+          padding-right: 1.1em;
+        }
+
+        &:hover, &.active {
+          #poly .btn-raise-hover;
+        }
+
+        &:active {
+          #poly .btn-raise-active;
+        }
+
+        &:hover, &:active, &.active {
+          border: 0;
+          border-left: 1px solid @medGray;
+
+          &:first-child {
+            border-left: 1px solid transparent;
+          }
+        }
+      }
+    }
+
+    SECTION:first-child LI:first-child A {
+      #poly .border-radius-left;
+      border-left: 0;
+    }
+
+    LI:last-child A {
+      #poly .border-radius-right;
+      border-right: 1px solid transparent;
+    }
+
+    SECTION#navPages {
+      border-right: 1px solid @medGray;
+
+      LI:first-child A {
+        padding-left: 1.2em;
+      }
+
+      LI:last-child A {
+        #poly .border-radius-right(0);
+
+        padding-right: 1.3em;
+        .dropArrow {
+          right: .65em;
+        }
+      }
+    }
+
+    SECTION#navActions {
+      LI {
+        background-color: @faintGray;
+        border-left: 1px solid @medGray;
+      }
+
+      A:hover, A:active, A.active {
+        border-left: 1px solid transparent;
+      }
+
+      LI:first-child {
+        border-left: none;
+
+        A, A:hover, A:active, A.active {
+          border-left: 1px solid transparent;
+          border-right: 1px solid transparent;
+        }
+      }
+    }
+
+    SECTION#navPagesCondensed {
+      display: none;
+    }
+
+    LI A.btnIcon {
+      display: block;
+      height: 1.75em;
+
+      IMG.btnIcon {
+        padding-top: .35em;
+        width: 1.1em;
+      }
+    }
+
+    .navBarsIcon {
+      padding-top: 0;
+
+      DIV.iconPart {
+        .border-radius(2px);
+        #gradient .vertical(lighten(@polyDarkGray, 20%), @polyDarkGray);
+
+        height: 4px;
+        margin-bottom: 3px;
+        position: relative;
+        top: .4em;
+      }
+
+      DIV:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    DIV.dropArrow {
+      border: transparent;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid @polyDarkGray;
+
+      height: 0;
+      position: absolute;
+      right: .5em;
+      width: 0;
+      top: .8em;
+    }
+  }
+}
+
+NAV.subnav {
+  A {
+    color: @polyDarkGray;
+  }
+
+  UL {
+    max-width: 100%;
+  }
+
+  LI {
+    #poly .inner-border;
+
+    cursor: pointer;
+    float: left;
+    height: 1.7em;
+    margin-bottom: 1px;
+    padding: 0 0.1em;
+    text-align: center;
+    width: 19%;
+
+    A {
+      #poly .btn-raise;
+      #poly .border-radius-top();
+
+      border: 1px solid @medGray;
+      display: block;
+      height: 100%;
+      margin-top: 0.7em;
+      padding-top: 0.1em;
+    }
+
+    A:hover {
+      #poly .btn-raise-hover;
+    }
+
+    A:active {
+      #poly .btn-raise-active;
+    }
+  }
+
+  LI.selected {
+    height: 2.5em;
+    width: 24%;
+
+    A {
+      #poly .inner-border;
+
+      background-color: white;
+      border-bottom: 1px solid white;
+      border-top: 1px solid @polyOrange;
+      cursor: default;
+      font-size: @normalSize;
+      font-weight: @semibold;
+      margin-top: 2px;
+      padding-top: 0.3em;
+    }
+
+    A:hover {
+      background-color: white;
+      background-image: none;
+    }
+
+    A:active {
+      background-color: white;
+      background-image: none;
+    }
+  }
+}
+
+NAV#condensedDrop .sectionName {
+  font-weight: normal;
+  font-style: italic;
+}
+
+NAV.dropdown {
+  .border-radius;
+  #poly .box-arrow(top, 85%, 8px, white, 2px, @medGray);
+  #poly .box-shadow(0, 2px, 2px, fadeOut(black, 85%));
+
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid @medGray;
+  min-width: 14em;
+  padding: 0.5em 0;
+  position: absolute;
+  top: (1.75em + 2.3em + 1em + 0.2em);
+
+  LI {
+    margin: .2em 0;
+  }
+
+  A {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    color: @polyDarkGray;
+    display: block;
+    font-weight: @semibold;
+    padding: 0 2em 0 0.8em;
+    text-align: left;
+  }
+
+  A:hover {
+    background-color: @lightGray;
+    border-color: @medGray;
+  }
+}
+
+.main {
+  DIV.fourCol {
+    DIV.cell {
+      display: inline-block;
+      margin: 0;
+      margin: 0 @xLargeSpace @xLargeSpace 0;
+      margin-right: @xLargeSpace;
+      text-align: justified;
+      vertical-align: top;
+      width: ((@fullWidth - @xLargeSpace * 3 - @largeSpace) / 4);
+
+      IMG {
+        display: block;
+        margin: 0 auto @largeSpace;
+      }
+
+      H4 {
+        font-size: @defaultSize;
+        font-weight: @bold;
+        height: 1.4em;
+        text-align: center;
+      }
+    }
+
+    DIV.cell.last {
+      margin-right: 0;
+    }
+  }
+}
+.threeCol {
+  .cell {
+    display: inline-block;
+    // add up to 33.3$
+    // width: 33.3%;
+    width: 31.1%;
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 11em;
+  }
+}
+
+FOOTER {
+  #poly .inner-border;
+
+  background-color: @heavyGray;
+  color: @medGray;
+  height: 100px;
+  margin-top: -100px;
+  min-width: 64.5em;
+  padding: 24px 0 8px;
+  position: relative;
+  z-index: 10;
+
+  A, A:link, A:visited {
+    color: white;
+    font-size: 16px;
+    font-weight: @semibold;
+    margin-right: 2em;
+  }
+
+  A:hover {
+    color: @polyOrange;
+  }
+
+  A.last {
+    margin-right: 0;
+  }
+
+  .main DIV {
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+}
+
+ASIDE {
+  float: right;
+  max-width: 31em;
+
+  IMG.limited {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+}
+
+.content {
+  float: left;
+  max-width: 28em;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clearboth {
+  clear: both;
+}
+
+.caps {
+  text-transform: uppercase;
+}
+
+// Spacing //
+
+.mlb { margin-bottom: @largeSpace; }
+.mxlb { margin-bottom: @xLargeSpace; }
+.mmb { margin-bottom: @medSpace; }
+.msb { margin-bottom: @smallSpace; }
+
+.mll { margin-left: @largeSpace; }
+.mxll { margin-left: @xLargeSpace; }
+.mml { margin-left: @medSpace; }
+.msl { margin-left: @smallSpace; }
+
+// Standard styling for synchronous error module
+.syncError {
+  #poly .error-raise;
+  &.info {
+    #poly .error-raise(@polyGreen);
+  }
+
+  font-size: @normalSize;
+  font-weight: @semibold;
+  padding: 0 .7em;
+  position: relative;
+  line-height: 2em;
+  margin-bottom: 1em;
+  text-align: center;
+  top: -1em;
+
+  .close {
+    .opacity(50);
+
+    cursor: pointer;
+    float: left;
+    margin-top: (-1em / 2) - .025em;
+    position: absolute;
+    top: 50%;
+    right: .5em;
+    width: 1em;
+  }
+
+  .close:hover {
+    .opacity(100);
+  }
+}
+
+/* BUTTONS AND UI ELEMENTS */
+
+// Standard styling for button elements (A, BUTTON, INPUT)
+BUTTON.btn, INPUT.btn {
+  border: 0;
+  cursor: pointer;
+  font-family: @sans-serif;
+}
+
+.btn {
+  display: inline-block;
+  margin: 0 0 1em 0;
+  outline: none;
+}
+
+.btn.large, .btn.small {
+  #poly .text-shadow(0, .1em, 0, rgba(0, 0, 0, 0.2));
+
+  background-color: @darkMint;
+  color: white;
+}
+
+.btn.large {
+  font-size: 18px;
+  font-weight: @semibold;
+  margin: 1.5em 0;
+  padding: 0.7em 3em;
+}
+
+.btn.small {
+  .border-radius();
+
+  font-size: @normalSize;
+  font-weight: @semibold;
+  margin: .5em 0;
+  padding: 0.4em 1em;
+}
+
+.btn.xsmall {
+  #poly .btn-raise;
+  #poly .inner-border;
+
+  color: @polyDarkGray;
+  font-size: @defaultSize;
+  font-weight: normal;
+  height: 1.8em;
+  line-height: 1.4em;
+  padding: .15em .8em .3em;
+}
+
+.btn.large:hover, .btn.small:hover, .btn.large:focus, .btn.small:focus {
+  background-color: @polyMint;
+}
+
+.btn.xsmall:hover, .btn.xsmall:focus {
+  #poly .btn-raise-hover;
+}
+
+.btn.large:active, .btn.small:active {
+  #poly .inner-shadow(0, 2px, 0, @darkMint);
+}
+
+.btn.xsmall:active {
+  #poly .btn-raise-active;
+}
+
+.btn.groupall {
+  .border-radius;
+}
+
+.btn.xsmall.groupleft {
+  #poly .border-radius-left();
+
+  margin-right: .1em;
+}
+
+.btn.xsmall.groupright {
+  #poly .border-radius-right();
+}
+
+.btn.warn {
+  background-color: @polyOrange;
+  #poly .box-shadow(.2em, .2em, 0, darken(@polyOrange, 15%));
+  #gradient .vertical(lighten(@polyOrange, 5%), darken(@polyOrange, 5%));
+  &:hover, &:focus {
+    #gradient .vertical(lighten(@polyOrange, 20%), darken(@polyOrange, 5%));
+  }
+  &:active {
+    #poly .box-shadow(0, -.13em, 0, darken(@polyOrange, 15%));
+  }
+}
+
+// Standard styling for form input fields.
+// Usage <div class='inputField'><input></div>
+DIV.inputField {
+  .border-radius;
+  #poly .box-shadow(0, -1px, 0, @lightGray);
+
+  background-color: @lightGray;
+  border: 3px solid @faintGray;
+  border-top-width: 2px;
+  clear: both;
+  display: inline-block;
+  font-size: @defaultSize;
+  float: none;
+  position: relative;
+  max-width: 25em;
+  width: 100%;
+
+  .inner, INPUT {
+    .border-radius;
+    #poly .inner-border;
+    #poly .box-shadow(0, 1px, 0, @lightGray);
+
+    background-color: white;
+    border: 1px solid @medGray;
+    min-height: 2em;
+    padding-left: .5em;
+    width: 100%;
+  }
+
+  INPUT, TEXTAREA {
+    .border-radius;
+    #poly .inner-border;
+
+    border: 1px solid @medGray;
+    font-size: @defaultSize;
+    height: 2em;
+    margin: 0;
+    padding: .4em 0 .5em .5em;
+  }
+
+  INPUT[disabled="disabled"] {
+    color: @heavyGray;
+    background: @faintGray;
+  }
+
+  INPUT.file {
+    .opacity(0);
+
+    z-index: 100;
+  }
+
+  DIV.customFile {
+    #poly .inner-border;
+
+    color: @medGray;
+    font-size: @defaultSize;
+    font-weight: lighter;
+    height: 2em;
+    line-height: 1em;
+    overflow: hidden;
+    padding: .4em 0 .5em .5em;
+    position: absolute;
+    top: 0;
+  }
+
+  .customFile.hasValue {
+    color: @polyDarkGray;
+  }
+
+  TEXTAREA {
+    display: block;
+    height: 5em;
+    resize: none;
+  }
+}
+
+LABEL.radioLabel {
+  cursor: pointer;
+  margin: 0 2em 0 .4em;
+  position: relative;
+  top: -.4em;
+}
+
+INPUT[type="radio"] {
+  display: none;
+}
+
+INPUT[type="radio"] + label {
+  #poly .box-shadow(0, 1px, 0, @lightGray);
+  #poly .inner-shadow(0, -1px, 0, @lightGray);
+
+  background-color: white;
+  border: 2px solid @medGray;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: .3em;
+  padding: 9px;
+  position: relative;
+}
+
+INPUT[type="radio"] + label:hover {
+  background-color: @faintGray;
+}
+
+INPUT[type="radio"]:checked + label:after {
+  #poly .box-shadow(0, 1px, 0, @lightGray);
+  #gradient .vertical(@medGray, darken(@medGray, 20%));
+
+  content: ' ';
+  width: 12px;
+  height: 12px;
+  border-radius: 50px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  font-size: 32px;
+}
+
+INPUT[type="radio"]:checked + label {
+  background-color: white;
+}
+
+// Standard styling for form elements
+.siteForm {
+  .field {
+    margin-bottom: @largeSpace;
+
+    UL.errorlist {
+      #poly .error-raise;
+      #poly .box-arrow(top, 85%, 8px, @polyOrange, 2px, darken(@polyOrange, 20%));
+
+      font-size: @tinySize;
+      left: 3px;
+      list-style-type: none;
+      margin-left: 0;
+      max-width: 25em;
+      padding: 0 @largeSpace;
+      position: relative;
+      width: 100%;
+
+      A, A:link, A:visited{
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  LABEL.inputDesc {
+    display: block;
+    font-size: @defaultSize;
+    font-style: normal;
+    font-weight: @semibold;
+    text-transform: uppercase;
+    margin: .2em 1em .1em 0;
+  }
+
+  P.inputDesc {
+    font-size: @tinySize;
+  }
+}
+
+.siteForm.twoCol {
+  P {
+    width: 50%;
+  }
+
+  .field {
+    float: left;
+    width: 50%;
+
+    P {
+      max-width: 28em;
+      width: 100%;
+    }
+  }
+
+  .field.fullWidth {
+    width: 100%;
+  }
+}
+
+// Standard styling for chart piles (on workspace rows, etc.)
+.chartPile {
+  DIV {
+    float: left;
+    margin-right: 1.5em;
+  }
+
+  IMG {
+    margin-right: .2em;
+    position: relative;
+    top: .2em;
+    width: 1.2em;
+  }
+}
+
+// Standard styling for hierarchy-imposing box
+.subbox {
+  .border-radius;
+
+  background-color: @faintGray;
+  margin-bottom: @largeSpace;
+  padding: @largeSpace;
+
+  DIV.inputField {
+    #poly .box-shadow(0, -1px, 0, @medGray);
+
+    background-color: lighten(@medGray, 10%);
+    border: 3px solid lighten(@medGray, 10%);
+  }
+}
+
+CODE {
+  font-size: @tinySize;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  padding: 2px 4px;
+  color: darken(@polyGreen, 15%);
+  background-color: @faintGray;
+  border: 1px solid @lightGray;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}

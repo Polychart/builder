@@ -1,0 +1,67 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ handler.application.title_prefix }}{% block title %}Polychart - Lightweight Visual Analytics and Business Intelligence{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'common/images/favicon.ico'%}" />
+
+    <meta http-equiv="cleartype" content="on">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <meta name="description" content="A browser-based platform for exploring data and creating charts." />
+    <meta name="author" content="" />
+
+    <link rel="stylesheet" href="{% static 'common/goldilocks.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'common/oldLayout.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'common/dependencies.css' %}" media="all">
+
+    {% block style %}<!--Additional CSS styles-->{% endblock %}
+
+    {% block javascript %}
+      <script src="{% static 'main/main.js' %}"></script>
+      <script src="{% static 'common/dependencies.js' %}"></script>
+      {% block more_script %}{% endblock %}
+    {% endblock %}
+  </head>
+
+  <body>
+{% block body_start %}{% endblock %}
+<div class='container' class="cf">
+  <header class="cf">
+    <a href="/"><img id="logo" src="{% static 'common/images/logo_header.png' %}" /></a>
+
+    {% block navigation %}
+    <nav class="topbar">
+      <ul class="cf">
+        {% if user.is_authenticated %}
+        <section id="navPages">
+          <li id="workspace"><a href="/home">Login</a></li>
+        </section>
+        {% else %}
+        <section id="navActions">
+          {% if settings.SIGNUP_ENABLED %}
+          <li id="signup"><a href="/signup">
+              Signup
+          </a></li>
+          {% endif %}
+          <li id="login"><a href="/login">Login</a></li>
+        </section>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endblock %}
+  </header>
+  {% block body %}{% endblock %}
+</div>
+
+{% block body_end %}{% endblock %}
+</body>
+</html>

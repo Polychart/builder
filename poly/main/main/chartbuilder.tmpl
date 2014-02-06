@@ -1,0 +1,27 @@
+<script type='text/html' id='tmpl-main-chart'>
+<div class="container" data-bind='css: { hasheader: hasHeader }'>
+  <!-- ko if: hasHeader -->
+    <!-- ko template: {name: 'tmpl-header', data: headerView } --><!-- /ko -->
+  <!-- /ko -->
+
+  <!-- ko template: {name: 'tmpl-overlay-container', data: overlayView } --><!-- /ko -->
+
+  <div class='graphbuilder-main'>
+    <!-- ko template: {name: 'tmpl-data-panel', data:dataView} --><!-- /ko -->
+
+    <div class="chartbuilder-container" data-bind="css: {visible: chartbuilderVisible}">
+      <!-- ko if: chartbuilderVisible -->
+      <!-- ko template: {name: 'tmpl-chartbuilder', data: chartbuilderView} --><!-- /ko -->
+      <!-- /ko -->
+    </div>
+
+    <div class="chartbuilder-container" data-bind="css: {visible: dataTableViewVisible }">
+      <!-- ko if: dataTableViewVisible -->
+      <!-- ko template: {name: 'tmpl-datatableviewer', data: dataTableView } --><!-- /ko -->
+      <!-- /ko -->
+    </div>
+  </div>
+
+  <!-- ko template: {name: 'tmpl-sharepanel', data: shareView} --><!-- /ko -->
+</div>
+</script>

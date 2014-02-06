@@ -1,0 +1,34 @@
+<!-- Template for `header.coffee` -->
+<script type='text/html' id='tmpl-header'>
+<header>
+  <img class="logo" src="/static/main/images/logo.svg" data-bind="click: backToHome"/>
+  <div id="db-controls">
+  <!-- ko if: dashboardControlsVisible() -->
+    <div class="btn-header">
+      <a href="/demo?showTutorial=yes" target="_blank">
+        <div class="content">Tutorial</div>
+      </a>
+    </div>
+    <!-- ko ifnot: isDemo -->
+    <div class="btn-header">
+      <a id="view-btn"
+         target="_blank"
+         data-bind="{attr: {href: $parent.dashViewHref}}">
+        <div class="content">Viewer</div>
+      </a>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $parent.exportingEnabled -->
+    <div class="btn-header" data-bind="click: toggleSharePanel">
+      <a id="export-btn">
+        <div class="content">Export</div>
+      </a>
+    </div>
+    <!-- /ko -->
+  <!-- /ko -->
+  <a data-bind="click: backToHome" id="backToHome" class="btn-header">
+    <div class="content">Home</div>
+  </a>
+  </div>
+</header>
+</script>

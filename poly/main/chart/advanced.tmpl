@@ -1,0 +1,36 @@
+<script type="text/html" id="tmpl-advanced-panel">
+<div id="advanced-panel">
+  <h1 class="underlined">Chart Options</h1>
+  <div class="advanced-panel-single" data-bind="template: {name: 'tmpl-facet', data: facetView }"></div>
+  <div class="advanced-panel-single" data-bind="template: {name: 'tmpl-coord', data: coordView }"></div>
+</div>
+</script>
+
+<script type="text/html" id="tmpl-facet">
+<div class="cf advanced-panel-content" data-dnd-type="metric" data-bind="pui_dndContainer: {itementer:onMetricEnter,itemdiscard:onMetricDiscard,datatype:'metric',name:'splitby',rerender:metric}">
+  <div class="advanced-panel-name">Split By</div>
+  <div class="advanced-panel-metric">
+    <!-- ko if: metric -->
+    <div class="dropped-metric" data-bind="template: {
+      data: metric,
+      name: metricTemplate,
+      afterRender: initMetricItem,
+    }">
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot: metric -->
+      <!-- ko template: {name: 'tmpl-metric-droppable', data: {enabled: true}} --><!-- /ko -->
+    <!-- /ko -->
+  </div>
+</div>
+</script>
+
+<script type="text/html" id="tmpl-coord">
+<div class="cf advanced-panel-content">
+  <a id="flip-btn" class="btn-large" data-bind="click: flipClick">
+    <div class="content">
+      Flip Axes
+    </div>
+  </a>
+</div>
+</script>

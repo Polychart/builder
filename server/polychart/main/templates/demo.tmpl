@@ -1,0 +1,48 @@
+{% extends "base.tmpl" %}
+
+{% load staticfiles %}
+
+{% block title %}Dashboard Builder Demo{% endblock %}
+
+{% block body %}
+  <div id="chart" class="polychart-ui"></div>
+  <script>
+    var home = require('poly/home');
+    var poly = require('poly');
+
+    polychart_global = poly.dashboard({
+      name: "Demo Dashboard",
+      dom: $('#chart')[0],
+      header: true,
+      {% if showTutorial %}
+      showTutorial: true,
+      {% endif %}
+      width: 'fill',
+      height: 'fill',
+      isDemo: true,
+      dataCollection: [{
+        type: 'local',
+        tables: [{
+            name: 'User Data',
+            data: require('poly/demoData/users').users,
+            meta: {
+              id: { type: 'num' },
+              signup_date: { type: 'date' },
+              gender: { type: 'cat' },
+              time_on_site: { type: 'num' },
+            }
+          },
+          {
+            name: 'Sales Data',
+            data: require('poly/demoData/sales').sales,
+            meta: {
+              date : { type: 'date' },
+              income: { type: 'num' },
+              expense: { type: 'num' },
+            }
+          }
+        ]
+      }]
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,155 @@
+<script type='text/html' id='tmpl-quickadd'>
+<div class='menu-panel'>
+  <h1>Charts</h1>
+  <!-- ko template: {name: 'tmpl-quickadd-item', data: lineView} --><!-- /ko -->
+  <!-- ko template: {name: 'tmpl-quickadd-item', data: barView} --><!-- /ko -->
+  <!-- ko template: {name: 'tmpl-quickadd-item', data: pieView} --><!-- /ko -->
+  <!-- ko template: {name: 'tmpl-quickadd-numeral', data: numeralView} --><!-- /ko -->
+  <!-- ko template: {name: 'tmpl-quickadd-table', data: tableView} --><!-- /ko -->
+  <!-- ko template: {name: 'tmpl-quickadd-comment', data: commentView} --><!-- /ko -->
+  <!-- ko template: {name: 'tmpl-custom-item'} --><!-- /ko -->
+  <!-- ko template: {name: 'tmpl-custom-table'} --><!-- /ko -->
+</div>
+</script>
+
+<script type='text/html' id='tmpl-quickadd-item'>
+<div class='quickadd-container' data-bind="css: {expanded: expanded}">
+  <div class='quickadd-container-inner'>
+    <div class='quickadd-item' data-bind="click:toggleExpand">
+      <div data-bind="attr: {class: imageClass} "/>
+      <div>
+        <span class="bolded">MAKE</span> <span data-bind="text:name">
+      </div>
+    </div>
+    <div class="expansion" data-bind="style: {maxHeight: renderHeight() + 'px'}">
+      <div class="expansion-container">
+        <!-- ko template: { name: 'tmpl-quickadd-aes', data: metricView1 } -->
+        <!-- /ko -->
+        <!-- ko template: { name: 'tmpl-quickadd-aes', data: metricView2 } -->
+        <!-- /ko -->
+        <div class="success-indicator" data-bind="css: {visible: successIndicatorVisible}">
+          Chart created successfully!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-quickadd-comment'>
+<div class='quickadd-container'>
+  <div class='quickadd-container-inner'>
+    <div class='quickadd-item' data-bind="click:addItem">
+      <div data-bind="attr: {class: imageClass} "/>
+      <div>
+        <span class="bolded">MAKE</span> <span data-bind="text:name">
+      </div>
+    </div>
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-quickadd-numeral'>
+<div class='quickadd-container' data-bind="css: {expanded: expanded}">
+  <div class='quickadd-container-inner'>
+    <div class='quickadd-item' data-bind="click:toggleExpand">
+      <div data-bind="attr: {class: imageClass} "/>
+      <div>
+        <span class="bolded">MAKE</span> <span data-bind="text:name">
+      </div>
+    </div>
+    <div class="expansion" data-bind="style: {maxHeight: renderHeight() + 'px'}">
+      <div class="expansion-container">
+        <!-- ko template: { name: 'tmpl-quickadd-aes', data: metricView } -->
+        <!-- /ko -->
+        <div class="success-indicator" data-bind="css: {visible: successIndicatorVisible}">
+          Value created successfully!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-quickadd-table'>
+<div class='quickadd-container' data-bind="css: {expanded: expanded}">
+  <div class='quickadd-container-inner'>
+    <div class='quickadd-item' data-bind="click:toggleExpand">
+      <div data-bind="attr: {class: imageClass} "/>
+      <div>
+        <span class="bolded">MAKE</span> <span data-bind="text:name">
+      </div>
+    </div>
+    <div class="expansion" data-bind="style: {maxHeight: renderHeight() + 'px'}">
+      <div class="expansion-container">
+
+        <div class="aes full-width" data-dnd-type="metric" data-bind="pui_dndContainer: {itementer:addMetric,itemdiscard:discardMetric,dropfilter:dropFilter,datatype:'metric',name:'addfilter'}, css: {disabled: !enabled()}">
+          <div class="title">Columns</div>
+          <!-- ko template: {name: 'tmpl-metric-droppable', data: {enabled: enabled()}} --><!-- /ko -->
+        </div>
+
+        <div class="aes dropped-metric" data-bind="visible:rows().length">
+          <div class="title">Categories</div>
+          <!-- ko foreach: rows -->
+            <div data-dnd-type="metric" data-bind="pui_dndContainer: {itemdiscard:$parent.discardMetric,datatype:'metric',name:name}, css: {disabled: !$parent.enabled()}">
+              <div class="menu-item dropped-metric" data-bind="template: {
+                data: $data,
+                name: 'tmpl-metric-attached',
+                afterRender: $parent.initMetricItem,
+              }">
+              </div>
+            </div>
+          <!-- /ko -->
+        </div>
+        <div class="aes dropped-metric" data-bind="visible:values().length">
+
+          <div class="title">Values</div>
+          <!-- ko foreach: values -->
+            <div data-dnd-type="metric" data-bind="pui_dndContainer: {itemdiscard:$parent.discardMetric,datatype:'metric',name:name}, css: {disabled: !$parent.enabled()}">
+              <div class="menu-item dropped-metric" data-bind="template: {
+                data: $data,
+                name: 'tmpl-metric-attached',
+                afterRender: $parent.initMetricItem,
+              }">
+              </div>
+            </div>
+          <!-- /ko -->
+        </div>
+        <div data-bind="visible: !canAdd() && !successIndicatorVisible()">
+          <span class="info-text">
+          Add least one numeric and one non-numeric column.
+          </span>
+        </div>
+        <div class="btn-large" data-bind="visible: canAdd, click: addItem">
+          Draw Table
+        </div>
+
+        <div class="success-indicator" data-bind="css: {visible: successIndicatorVisible}">
+          Table created successfully!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</script>
+
+
+<script type='text/html' id='tmpl-custom-item'>
+<div class='quickadd-container'>
+  <div class='quickadd-container-inner'>
+    <div class='quickadd-item' data-bind="click:newCustomChart">
+      <span class="bolded">Custom</span> Chart
+    </div>
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-custom-table'>
+<div class='quickadd-container'>
+  <div class='quickadd-container-inner'>
+    <div class='quickadd-item' data-bind="click:newCustomTable">
+      <span class="bolded">Custom</span> Table
+    </div>
+  </div>
+</div>
+</script>

@@ -1,0 +1,27 @@
+<script type='text/html' id='tmpl-comment-item'>
+<div class="item comment"
+     data-bind="style: {zIndex: shiftedZIndex},
+                pui_jqDraggableResizeable: dragResizeParams,
+                css: {'drag-shadow': isDragging},
+                event: {mousedown: onSelect}">
+  <div class="comment-bg">
+    <div class="author" data-bind="text: author">
+    </div>
+    <div class="container">
+      <div class="content" contenteditable="true"
+           data-bind="pui_contentEditable: textContent,
+                      pui_placeholder: defaultText,
+                      pui_placeholder_class: 'default',
+                      pui_draggableSelector: '.item',
+                      attr: {contenteditable: !isViewer()},
+                      event: {blur: onEditAreaBlur},
+                      enable: !isViewer(),
+                      css: {enabled: !isViewer()}">
+      </div>
+    </div>
+    <div class="details" data-bind="visible: !isViewer(), click: deleteItem">
+      <div class="deleteButton"></div>
+    </div>
+  </div>
+</div>
+</script>

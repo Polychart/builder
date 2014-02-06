@@ -1,0 +1,27 @@
+{
+  "name": "polychart-dashboardbuilder",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Polychart/dbb.git"
+  },
+  "dependencies": {
+    "faye-websocket": ">= 0.6.1",
+    "jsdom": ">= 0.8.1",
+    "underscore": ">= 1.5.1"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.6.3",
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.9",
+    "grunt-contrib-less": "~0.7.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "stitch": "~0.3.3",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-text-replace": "~0.3.7"
+  }
+}

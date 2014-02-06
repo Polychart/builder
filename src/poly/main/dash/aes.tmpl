@@ -1,0 +1,17 @@
+<script type='text/html' id='tmpl-quickadd-aes'>
+<div class="aes full-width" data-dnd-type="metric" data-bind="pui_dndContainer: {itementer:onMetricEnter,itemdiscard:onMetricDiscard,dropfilter:dropFilter,datatype:'metric',name:aes,rerender:metric}, css: {disabled: !enabled()}">
+  <div class="title" data-bind="text: aes"></div>
+  <!-- ko if: metric -->
+  <div class="dropped-metric" data-bind="template: {
+    data: metric,
+    name: 'tmpl-metric-attached',
+    afterRender: initMetricItem,
+  }">
+  </div>
+  <!-- /ko -->
+  <!-- ko ifnot: metric -->
+    <!-- ko template: {name: 'tmpl-metric-droppable', data: {enabled: enabled()}} -->
+    <!-- /ko -->
+  <!-- /ko -->
+</div>
+</script>

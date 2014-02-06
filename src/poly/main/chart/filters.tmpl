@@ -1,0 +1,124 @@
+<script type='text/html' id='tmpl-filters'>
+  <div class="filter-list" data-bind="template: {
+                                      foreach: filters,
+                                      name: 'tmpl-filter'
+                                      }">
+  </div>
+  <div id="new-filter" class="menu-item-container"
+       data-dnd-type="metric"
+       data-bind="pui_dndContainer: {
+                  itementer:onMetricEnter,
+                  dropfilter:dropFilter,
+                  datatype:'metric',
+                  name:'addfilter'},
+                  css: {disabled: !enabled()}">
+    <div class="menu-item-name">
+      <div class="content">Add Filter</div>
+    </div>
+    <div class="menu-item">
+      <!-- ko template: {name: 'tmpl-metric-droppable', data: {enabled: enabled()}} --><!-- /ko -->
+    </div>
+  </div>
+</script>
+
+<script type='text/html' id='tmpl-filter'>
+  <div class="menu-item-container"
+       data-dnd-type="metric"
+       data-bind="pui_dndContainer: {
+                  itementer:onMetricEnter,
+                  itemdiscard:onMetricDiscard,
+                  dropfilter:dropFilter,
+                  datatype:'metric',
+                  name:label},
+                  css: {disabled: !$parent.enabled()}">
+    <div class="menu-item-name">
+      <div class="content" data-bind="text: label"></div>
+    </div>
+    <div class="menu-item">
+      <div class="dropped-metric" data-bind="template: {
+                                             data: metric,
+                                             name: 'tmpl-metric-dropdown',
+                                             afterRender: initMetricItem
+                                             }">
+      </div>
+    </div>
+  </div>
+  <!-- ko template: {
+       name: 'tmpl-filter-slider',
+       if: metric().type == 'date' || metric().type == 'num',
+       afterRender: initSliderFilter
+  }--><!-- /ko -->
+  <!-- ko template: {
+       name: 'tmpl-filter-cat',
+       if: metric().type == 'cat',
+       afterRender: initCatFilter
+  }--><!-- /ko -->
+</script>
+
+<script type='text/html' id='tmpl-filter-dropdown'>
+<div class="dropdown-content metric-option">
+  <div class="metric-option-item" data-bind="template: {name: 'tmpl-metric-tableName', data: metric}">
+  </div>
+
+  <div class="btn-large" data-bind="click: onMetricDiscard">
+    <img src="/static/main/images/icon_close.png" />
+    <div class="content" data-bind="text: 'Remove this Filter'">
+    </div>
+  </div>
+</div>
+</script>
+
+<script type='text/html' id='tmpl-filter-nonull'>
+<input class="metric-option-item-checkbox" type="checkbox" data-bind="checked:notNull">
+</input>Not Null
+</script>
+
+<script type='text/html' id='tmpl-filter-slider'>
+  <!-- ko if: metric().type == 'date' -->
+  <div class="date-filter-dropdown menu-item-container">
+    <div class="menu-item-name">
+    </div>
+    <div class="menu-item">
+      <div class='dropdown btn-large'
+      data-bind="DropdownSingle: {
+          options: dateOptions,
+          selected: dateOptionSelected,
+          hasIcons: false,
+          name: 'dateRange'
+        }"></div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <div class="menu-item-container" data-bind="visible: sliderVisible">
+    <div class="menu-item-name">
+    </div>
+    <div class="menu-item">
+      <div class="slider-container">
+        <div class="slider selector"></div>
+        <div class="slider-value">
+          <span data-bind="text: filterDisplay()"></span>
+        </div>
+      </div>
+      <div class="null-filter-big" data-bind="template: 'tmpl-filter-nonull', visible: showNotNull"></div>
+    </div>
+  </div>
+</script>
+
+<script type='text/html' id='tmpl-filter-cat'>
+  <div class="menu-item-container">
+    <div class="menu-item-name">
+    </div>
+    <div class="menu-item">
+      <div class="dropdown btn-large"
+           data-bind="DropdownMulti: {
+            options: filterCatOptions,
+            optionsText: filterCatOptionsText,
+            selected: filterCatValue,
+            name: 'catChoices'
+           }"></div>
+
+      <div class="null-filter-big" data-bind="template: 'tmpl-filter-nonull', visible: showNotNull && !filterCatValue().length"></div>
+
+    </div>
+  </div>
+</script>

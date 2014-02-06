@@ -1,0 +1,16 @@
+<script type='text/html' id='tmpl-metric-item'>
+  <div class="metric" data-bind="css: extraCSS, attr: { title: name }">
+    <div class="metric-icon" data-bind="css: type"></div>
+    <div class="metric-name" data-bind="text: name"></div>
+    <div class="drag-hint"></div>
+  </div>
+</script>
+
+<script type='text/html' id='tmpl-metric-droppable'>
+<div class="droppable" data-bind="css: {disabled: !enabled}">
+    <div class="inner cf">
+      <img class="droppable-img" src="/static/main/images/drag.png"></img>
+      <div class="droppable-text"><span class='bolded'>SELECT</span> Metric</div>
+    </div>
+</div>
+</script>

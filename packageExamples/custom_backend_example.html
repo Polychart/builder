@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Dashboard Builder Demo</title>
+
+    <link rel="stylesheet" href="static/dependencies.css" />
+    <link rel="stylesheet" href="static/main.css" />
+
+    <script src="static/dependencies.js"></script>
+    <script src="static/main.js"></script>
+
+  </head>
+  <body>
+    <div id="dashboard"></div>
+
+    <script>
+      var poly = require('poly');
+      poly.dashboard({
+        name: "Demo dashboard",
+        dom: $('#dashboard')[0],
+        header: false,
+        width: 'fill',
+        height: 'fill',
+        dataCollection: {
+          type: 'remote',
+          dataSourceKey: 'db1',
+          customBackend: function (request, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/data-source', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                  callback(null, JSON.parse(xhr.responseText));
+                } else {
+                  callback("error: " + xhr.statusCode);
+                }
+              }
+            };
+            xhr.send(JSON.stringify(request));
+          }
+        },
+        customSaving: function (serializedDashboard) {
+          // TODO Save serializedDashboard somewhere safe!
+        }
+      });
+    </script>
+  </body>
+</html>
