@@ -214,7 +214,7 @@ class SqlConn(DataSourceConnection):
       startTime = time()
 
       cur = self.db.cursor()
-      cur.execute(querySql, params)
+      cur.execute(querySql, [params])
       result = cur.fetchall()
       cur.close()
 
